@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="ESTADO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela ESTADO já existe.">
+            <not>
+                <tableExists tableName="ESTADO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ESTADO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_ESTADO"/>
+            </column>
+            <column name="VALOR" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" 
+                			 uniqueConstraintName="UK_VALOR"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="joao.carvalho" id="CREATE_S_ESTADO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_ESTADO já existe">
+            <not>
+                <sequenceExists sequenceName="S_ESTADO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_ESTADO" startValue="1"/>
+    </changeSet>
+
+
+</databaseChangeLog>
