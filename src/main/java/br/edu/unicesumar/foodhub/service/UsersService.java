@@ -12,13 +12,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.base.CrudService;
 import br.edu.unicesumar.foodhub.config.auth.jwt.Jwt;
 import br.edu.unicesumar.foodhub.config.auth.jwt.JwtTool;
 import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.dto.sign.SignIn;
 import br.edu.unicesumar.foodhub.repository.UsersRepository;
 
-public abstract class UsersService<T extends Users> implements UserDetailsService {
+public abstract class UsersService<T extends Users & BaseEntity> extends CrudService<T> implements UserDetailsService {
 
 	@Lazy
 	@Autowired

@@ -6,8 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -25,8 +24,7 @@ public class Estado implements BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ESTADO")
 	private Long id;
 
-	@NotNull
-	@NotBlank
+	@NotEmpty
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
