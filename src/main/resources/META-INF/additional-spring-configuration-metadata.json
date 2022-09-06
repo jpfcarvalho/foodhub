@@ -1,0 +1,23 @@
+{"properties": [
+  {
+    "name": "foodhub.auth.jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'foodhub.auth.jwt.secret'"
+  },
+  {
+    "name": "foodhub.auth.jwt.expiration-ms",
+    "type": "java.lang.Integer",
+    "description": "A description for 'foodhub.auth.jwt.expirationMs'"
+  },
+  {
+    "name": "foodhub.auth.admin.username",
+    "type": "java.lang.String",
+    "description": "A description for 'foodhub.auth.admin.username'"
+  },
+
+  {
+    "name": "foodhub.auth.admin.password",
+    "type": "java.lang.String",
+    "description": "A description for 'foodhub.auth.admin.password'"
+  }
+]}
