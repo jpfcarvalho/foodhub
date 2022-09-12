@@ -17,14 +17,16 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.config.auth.jwt.Jwt;
 import br.edu.unicesumar.foodhub.config.auth.jwt.JwtTool;
+import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.service.UsersService;
 
-public class AuthenticationFilter extends OncePerRequestFilter {
+public class AuthenticationFilter<T extends Users & BaseEntity> extends OncePerRequestFilter {
 
 	@Autowired
-	private UsersService usersService;
+	private UsersService<T> usersService;
 
 	@Autowired
 	private JwtTool tokenTool;

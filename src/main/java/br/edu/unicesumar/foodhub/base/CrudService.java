@@ -1,5 +1,7 @@
 package br.edu.unicesumar.foodhub.base;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,10 @@ public abstract class CrudService<T extends BaseEntity> {
 
 	public Page<T> findAll(Pageable pageable) {
 		return repository.findAll(pageable);
+	}
+
+	public Optional<T> findById(Long id) {
+		return repository.findById(id);
 	}
 
 	public void deleteById(Long id) {

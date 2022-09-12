@@ -13,14 +13,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.domain.Users;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-public class WebSecurityConfig {
+public class WebSecurityConfig<T extends Users & BaseEntity> {
 
 	@Bean
-	public AuthenticationFilter authenticationTokenFilterBean() {
-		return new AuthenticationFilter();
+	public AuthenticationFilter<T> authenticationTokenFilterBean() {
+		return new AuthenticationFilter<T>();
 	}
 
 	@Bean

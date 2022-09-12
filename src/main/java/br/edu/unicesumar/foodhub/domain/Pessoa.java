@@ -47,7 +47,7 @@ public class Pessoa extends Users implements BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ENDERECO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_PESSOA")
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
