@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="GRUPO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela GRUPO já existe.">
+            <not>
+                <tableExists tableName="GRUPO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="GRUPO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_GRUPO"/>
+            </column>
+            <column name="NOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_RESTAURANTE" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_GRUPO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_GRUPO já existe">
+            <not>
+                <sequenceExists sequenceName="S_GRUPO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_GRUPO" startValue="1"/>
+    </changeSet>
+    
+<!--   
+    <changeSet author="felipe.magrinelli" id="FK_GRUPO_RESTAURANTE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_GRUPO_RESTAURANTE já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_GRUPO_RESTAURANTE"
+                        foreignKeyTableName="GRUPO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_RESTAURANTE"
+                baseTableName="GRUPO"
+                constraintName="FK_GRUPO_RESTAURANTE"
+                referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
+    </changeSet> --> 
+    
+
+
+</databaseChangeLog>
