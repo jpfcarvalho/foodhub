@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unicesumar.foodhub.base.CrudController;
-import br.edu.unicesumar.foodhub.domain.Grupo;
+import br.edu.unicesumar.foodhub.domain.Produto;
 
 @RestController
-@RequestMapping("/api/grupos")
-public class GrupoController extends CrudController<Grupo> {
+@RequestMapping("/api/produtos")
+public class ProdutoController extends CrudController<Produto> {
 
 }

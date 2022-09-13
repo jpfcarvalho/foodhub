@@ -2,6 +2,7 @@ package br.edu.unicesumar.foodhub.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,26 +16,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.edu.unicesumar.foodhub.domain.Grupo;
+import br.edu.unicesumar.foodhub.domain.Produto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
 @Rollback
-public class GrupoServiceTest {
+public class ProdutoServiceTest {
 
 	@Autowired
-	private GrupoService service;
+	private ProdutoService service;
 
 	@Test
-	public void salvarGrupo() {
+	public void salvarProduto() {
 
-		Grupo entity = new Grupo(-1L, "Grupo teste", null);
+		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true);
 
-		Grupo newEntity = service.save(entity);
+		Produto newEntity = service.save(entity);
 
-		assertEquals(newEntity.getNome(), "Grupo teste");
+		assertEquals(newEntity.getNome(), "Produto teste");
 
 		service.getRepository().deleteAll();
 
@@ -43,30 +44,31 @@ public class GrupoServiceTest {
 	@Test
 	public void BuscarTodosGrupos() {
 
-		Grupo entity1 = new Grupo(-1L, "Grupo teste1", null);
-		Grupo entity2 = new Grupo(-1L, "Grupo teste2", null);
-		Grupo entity3 = new Grupo(-1L, "Grupo teste3", null);
+		Produto entity1 = new Produto(-1L, "Produto teste1", "Produto descricao1", BigDecimal.valueOf(18.90), true);
+		Produto entity2 = new Produto(-1L, "Produto teste2", "Produto descricao2", BigDecimal.valueOf(20.90), true);
+		Produto entity3 = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true);
 
 		service.getRepository().save(entity1);
 		service.getRepository().save(entity2);
 		service.getRepository().save(entity3);
 
-		Page<Grupo> entitys = service.findAll(Pageable.ofSize(2));
+		Page<Produto> entitys = service.findAll(Pageable.ofSize(2));
 
 		assertEquals(entitys.getTotalElements(), 3L);
 		assertEquals(entitys.getTotalPages(), 2);
-		assertEquals(entitys.getContent().get(0).getNome(), "Grupo teste1");
+		assertEquals(entitys.getContent().get(0).getNome(), "Produto teste1");
 
 		service.getRepository().deleteAll();
 	}
 
 	@Test
-	public void DeletarGrupo() {
+	public void DeletarProduto() {
 
-		Grupo entity = new Grupo(1L, "Grupo teste", null);
+		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true);
+
 		service.getRepository().save(entity);
 
-		List<Grupo> entitys = service.getRepository().findAll();
+		List<Produto> entitys = service.getRepository().findAll();
 		assertEquals(entitys.size(), 1);
 
 		service.deleteById(entitys.get(0).getId());
