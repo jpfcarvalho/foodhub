@@ -42,5 +42,5 @@ public class Produto implements BaseEntity {
 
 	@NotEmpty
 	@Column(name = "ativo", nullable = false)
-	private Boolean ativo;
+	private Boolean ativo = Boolean.TRUE;
 }

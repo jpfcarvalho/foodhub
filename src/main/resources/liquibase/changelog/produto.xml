@@ -20,9 +20,9 @@
             <column name="NOME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRICAO" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            
+            <column name="DESCRICAO" type="VARCHAR(255)"/>
+        
             <column name="VALOR" type="NUMERIC(10,2)">
                 <constraints nullable="false"/>
             </column>
@@ -64,7 +64,4 @@
                 constraintName="FK_PRODUTO_GRUPO"
                 referencedColumnNames="ID" referencedTableName="GRUPO"/>
     </changeSet>
-    
-
-
 </databaseChangeLog>
