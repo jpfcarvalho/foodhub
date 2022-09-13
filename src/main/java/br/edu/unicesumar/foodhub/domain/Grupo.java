@@ -1,0 +1,33 @@
+package br.edu.unicesumar.foodhub.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import br.edu.unicesumar.foodhub.base.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+@Table(name = "grupo")
+public class Grupo implements BaseEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_GRUPO")
+	@SequenceGenerator(name = "S_GRUPO", sequenceName = "S_GRUPO", allocationSize = 1)
+	private Long id;
+
+	@NotEmpty
+	@Column(name = "nome", nullable = false)
+	private String nome;
+
+}
