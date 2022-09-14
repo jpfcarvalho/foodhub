@@ -12,5 +12,8 @@
 		<include file="changelog/endereco.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/categoria.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/restaurante.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/grupo.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/produto.xml" relativeToChangelogFile="true"/>
+		
 
 </databaseChangeLog>
