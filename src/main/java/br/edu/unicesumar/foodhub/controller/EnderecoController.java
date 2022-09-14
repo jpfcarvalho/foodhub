@@ -7,7 +7,7 @@ import br.edu.unicesumar.foodhub.base.CrudController;
 import br.edu.unicesumar.foodhub.domain.Endereco;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/api/enderecos")
 public class EnderecoController extends CrudController<Endereco> {
 
 }

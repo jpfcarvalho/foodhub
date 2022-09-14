@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="USERS_ROLES">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela USERS_ROLES já existe.">
+            <not>
+                <tableExists tableName="USERS_ROLES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="USERS_ROLES">
+            <column name="USERS_ID" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLES" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_USERS_ROLES_USERS">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_USERS_ROLES_USERS já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_USERS_ROLES_USERS"
+                        foreignKeyTableName="USERS_ROLES"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="USERS_ID"
+                baseTableName="USERS_ROLES"
+                constraintName="FK_USERS_ROLES_USERS"
+                referencedColumnNames="ID" referencedTableName="USERS"/>
+    </changeSet>
+    
+
+
+</databaseChangeLog>

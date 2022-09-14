@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import br.edu.unicesumar.foodhub.domain.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -28,7 +28,7 @@ public class JwtTool {
 	@Value("${foodhub.auth.jwt.expiration-ms}")
 	private int expirationMs;
 
-	public Jwt generateToken(UserDetails userDetails) {
+	public Jwt generateToken(Users userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 
 		String token = Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername()).setIssuedAt(new Date())

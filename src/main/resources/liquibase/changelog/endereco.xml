@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="ENDERECO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela ENDERECO já existe.">
+            <not>
+                <tableExists tableName="ENDERECO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ENDERECO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_ENDERECO"/>
+            </column>
+            <column name="NUMERO" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMPLEMENTO" type="VARCHAR(255)"/>
+            <column name="CEP" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOUGRADOURO" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BAIRRO" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LATITUDE" type="NUMERIC(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LONGITUDE" type="NUMERIC(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APELIDO" type="VARCHAR(255)"/>
+            <column name="PRINCIPAL" type="VARCHAR(1)"/>
+            <column name="ID_CIDADE" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_PESSOA" type="NUMERIC(10,0)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="joao.carvalho" id="CREATE_S_ENDERECO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_ENDERECO já existe">
+            <not>
+                <sequenceExists sequenceName="S_ENDERECO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_ENDERECO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_ENDERECO_CIDADE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_ENDERECO_CIDADE já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_ENDERECO_CIDADE"
+                        foreignKeyTableName="ENDERECO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_CIDADE"
+                baseTableName="ENDERECO"
+                constraintName="FK_ENDERECO_CIDADE"
+                referencedColumnNames="ID" referencedTableName="CIDADE"/>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_ENDERECO_PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_ENDERECO_PESSOA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_ENDERECO_PESSOA"
+                        foreignKeyTableName="ENDERECO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PESSOA"
+                baseTableName="ENDERECO"
+                constraintName="FK_ENDERECO_PESSOA"
+                referencedColumnNames="ID" referencedTableName="PESSOA"/>
+    </changeSet>
+    
+
+</databaseChangeLog>

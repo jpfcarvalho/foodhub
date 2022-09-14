@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ public class Cidade implements BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_CIDADE")
+	@SequenceGenerator(name = "S_CIDADE", sequenceName = "S_CIDADE", allocationSize = 1)
 	private Long id;
 
 	@NotNull
@@ -33,7 +35,7 @@ public class Cidade implements BaseEntity {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
 	@JoinColumn(name = "id_estado", nullable = false)
 	private Estado estado;
 

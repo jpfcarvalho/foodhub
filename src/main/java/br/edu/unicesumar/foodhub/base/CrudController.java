@@ -17,39 +17,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 public abstract class CrudController<T extends BaseEntity> {
-	
+
 	@Autowired
 	private CrudService<T> service;
-	
-	public CrudService<T> getService(){
+
+	public CrudService<T> getService() {
 		return service;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<Page<T>> findAll(Pageable pageable){
+	public ResponseEntity<Page<T>> findAll(Pageable pageable) {
 		return ResponseEntity.ok(service.findAll(pageable));
 	}
-	
+
+	@GetMapping("/{id}")
+	public ResponseEntity<T> findById(@PathVariable(name = "id") Long id) {
+		return ResponseEntity.ok(service.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Registro não encontrado")));
+	}
+
 	@PostMapping
 	public ResponseEntity<T> save(@RequestBody T entity) throws URISyntaxException {
 		T newEntity = service.save(entity);
 		return ResponseEntity.created(new URI("/" + newEntity.getId())).body(newEntity);
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<T> update(@PathVariable(name="id") Long id, @RequestBody T entity) {
+	public ResponseEntity<T> update(@PathVariable(name = "id") Long id, @RequestBody T entity) {
 		validarRegistro(id);
 		entity.setId(id);
 		return ResponseEntity.ok(service.save(entity));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteById(@PathVariable(name="id") Long id) {
+	public ResponseEntity<Void> deleteById(@PathVariable(name = "id") Long id) {
 		validarRegistro(id);
 		service.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	private void validarRegistro(Long id) {
 		if (!service.getRepository().existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Registro não encontrado");
