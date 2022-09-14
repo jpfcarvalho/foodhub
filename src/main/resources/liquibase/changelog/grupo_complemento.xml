@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="GRUPO_COMPLEMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela GRUPO_COMPLEMENTO já existe.">
+            <not>
+                <tableExists tableName="GRUPO_COMPLEMENTO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="GRUPO_COMPLEMENTO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_GRUPO_COMPLEMENTO"/>
+            </column>
+            <column name="NOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="OBRIGATORIO" type="CHAR(1)">
+            	<constraints nullable="false"/>
+            </column>
+            
+        	<column name="VALOR" type="NUMERIC(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="QUANTIDADE_MINIMA" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="QUANTIDADE_MAXIMA" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="ID_PRODUTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_GRUPO_COMPLEMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_GRUPO_COMPLEMENTO já existe">
+            <not>
+                <sequenceExists sequenceName="S_GRUPO_COMPLEMENTO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_GRUPO_COMPLEMENTO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_GRUPO_COMPLEMENTO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_GRUPO_COMPLEMENTO_PRODUTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_GRUPO_COMPLEMENTO_PRODUTO"
+                        foreignKeyTableName="GRUPO_COMPLEMENTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PRODUTO"
+                baseTableName="GRUPO_COMPLEMENTO"
+                constraintName="FK_GRUPO_COMPLEMENTO_PRODUTO"
+                referencedColumnNames="ID" referencedTableName="PRODUTO"/>
+    </changeSet>
+</databaseChangeLog>

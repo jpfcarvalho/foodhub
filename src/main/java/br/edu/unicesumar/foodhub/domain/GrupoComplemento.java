@@ -1,6 +1,5 @@
 package br.edu.unicesumar.foodhub.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,30 +23,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "produto")
-public class Produto implements BaseEntity {
+@Table(name = "grupo_complemento")
+public class GrupoComplemento implements BaseEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_PRODUTO")
-	@SequenceGenerator(name = "S_PRODUTO", sequenceName = "S_PRODUTO", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_GRUPO_COMPLEMENTO")
+	@SequenceGenerator(name = "S_GRUPO_COMPLEMENTO", sequenceName = "S_GRUPO_COMPLEMENTO", allocationSize = 1)
 	private Long id;
 
 	@NotEmpty
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@Column(name = "descricao")
-	private String descricao;
+	@NotEmpty
+	@Column(name = "obrigatorio", nullable = false)
+	private Boolean obrigatorio = Boolean.FALSE;
 
 	@NotEmpty
-	@Column(name = "valor", nullable = false)
-	private BigDecimal valor;
+	@Column(name = "quantidade_minima", nullable = false)
+	private Long quantidade_minima;
 
 	@NotEmpty
-	@Column(name = "ativo", nullable = false)
-	private Boolean ativo = Boolean.TRUE;
+	@Column(name = "quantidade_maxima", nullable = false)
+	private Long quantidade_maxima;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_produto")
-	private List<GrupoComplemento> grupoComplementos;
+	@JoinColumn(name = "id_complemento")
+	private List<ProdutoComplemento> produtos;
+
 }
