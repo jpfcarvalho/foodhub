@@ -39,7 +39,8 @@ public class WebSecurityConfig {
 			throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/", "/**/auth/**", "/swagger-ui/**").permitAll().anyRequest().authenticated();
+				.antMatchers("/", "/**/auth/**", "/**/**/signup", "/swagger-ui/**").permitAll().anyRequest()
+				.authenticated();
 
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		return http.build();

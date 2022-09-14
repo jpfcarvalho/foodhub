@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -22,6 +23,7 @@ public class Estado implements BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ESTADO")
+	@SequenceGenerator(name = "S_ESTADO", sequenceName = "S_ESTADO", allocationSize = 1)
 	private Long id;
 
 	@NotEmpty

@@ -4,40 +4,41 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="joao.carvalho" id="ESTADO">
+    <changeSet author="joao.carvalho" id="USERS">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A tabela ESTADO já existe.">
+                       onFailMessage="A tabela USERS já existe.">
             <not>
-                <tableExists tableName="ESTADO"/>
+                <tableExists tableName="USERS"/>
             </not>
         </preConditions>
-        <createTable tableName="ESTADO">
+        <createTable tableName="USERS">
             <column name="ID" type="NUMERIC(10,0)">
                 <constraints nullable="false" primaryKey="true"
-                             primaryKeyName="PK_ESTADO"/>
+                             primaryKeyName="PK_USERS"/>
             </column>
-            <column name="UF" type="VARCHAR(2)">
-                <constraints nullable="false" unique="true" 
-                			 uniqueConstraintName="UK_uf"/>
+             <column name="EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="NOME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="USERNAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
             </column>
+            <column name="PASSWORD" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+    		</column>
         </createTable>
     </changeSet>
 
-    <changeSet author="joao.carvalho" id="CREATE_S_ESTADO">
+    <changeSet author="joao.carvalho" id="CREATE_S_USERS">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A sequence S_ESTADO já existe">
+                       onFailMessage="A sequence S_USERS já existe">
             <not>
-                <sequenceExists sequenceName="S_ESTADO"/>
+                <sequenceExists sequenceName="S_USERS"/>
             </not>
         </preConditions>
         <createSequence incrementBy="1"
-                        sequenceName="S_ESTADO" startValue="1"/>
+                        sequenceName="S_USERS" startValue="1"/>
     </changeSet>
-
 
 </databaseChangeLog>

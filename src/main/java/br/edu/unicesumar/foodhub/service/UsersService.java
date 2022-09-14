@@ -10,17 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.edu.unicesumar.foodhub.base.BaseEntity;
-import br.edu.unicesumar.foodhub.base.CrudService;
 import br.edu.unicesumar.foodhub.config.auth.jwt.Jwt;
 import br.edu.unicesumar.foodhub.config.auth.jwt.JwtTool;
 import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.dto.sign.SignIn;
 import br.edu.unicesumar.foodhub.repository.UsersRepository;
 
-public abstract class UsersService<T extends Users & BaseEntity> extends CrudService<T> implements UserDetailsService {
+@Service
+public class UsersService implements UserDetailsService {
 
 	@Lazy
 	@Autowired
@@ -33,10 +33,10 @@ public abstract class UsersService<T extends Users & BaseEntity> extends CrudSer
 	private JwtTool jwtTokenTool;
 
 	@Autowired
-	private UsersRepository<T> usersRepository;
+	private UsersRepository usersRepository;
 
 	@Override
-	public T loadUserByUsername(String username) throws UsernameNotFoundException {
+	public Users loadUserByUsername(String username) throws UsernameNotFoundException {
 		return usersRepository.findUsersByUsername(username);
 	}
 
@@ -53,7 +53,7 @@ public abstract class UsersService<T extends Users & BaseEntity> extends CrudSer
 
 	}
 
-	public T signUp(T entity) {
+	public Users signUp(Users entity) {
 		entity.setUsername(entity.getEmail());
 		if (usersRepository.existsByUsername(entity.getUsername())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");

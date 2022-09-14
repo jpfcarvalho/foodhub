@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela PESSOA já existe.">
+            <not>
+                <tableExists tableName="PESSOA"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PESSOA">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_PESSOA"/>
+            </column>
+            <column name="NOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOBRENOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CPF" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TELEFONE" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_USERS" type="NUMERIC(10,0)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="joao.carvalho" id="CREATE_S_PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_PESSOA já existe">
+            <not>
+                <sequenceExists sequenceName="S_PESSOA"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_PESSOA" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_PESSOA_USERS">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PESSOA_USERS já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PESSOA_USERS"
+                        foreignKeyTableName="PESSOA"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_USERS"
+                baseTableName="PESSOA"
+                constraintName="FK_PESSOA_USERS"
+                referencedColumnNames="ID" referencedTableName="USERS"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="CIDADE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela CIDADE já existe.">
+            <not>
+                <tableExists tableName="CIDADE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="CIDADE">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_CIDADE"/>
+            </column>
+            <column name="NOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_ESTADO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="joao.carvalho" id="CREATE_S_CIDADE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_CIDADE já existe">
+            <not>
+                <sequenceExists sequenceName="S_CIDADE"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_CIDADE" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_CIDADE_ESTADO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_CIDADE_ESTADO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_CIDADE_ESTADO"
+                        foreignKeyTableName="CIDADE"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_ESTADO"
+                baseTableName="CIDADE"
+                constraintName="FK_CIDADE_ESTADO"
+                referencedColumnNames="ID" referencedTableName="ESTADO"/>
+    </changeSet>
+    
+
+
+</databaseChangeLog>
