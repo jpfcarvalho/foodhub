@@ -7,7 +7,7 @@ import br.edu.unicesumar.foodhub.base.CrudController;
 import br.edu.unicesumar.foodhub.domain.ProdutoComplemento;
 
 @RestController
-@RequestMapping("/api/produtosComplementos")
+@RequestMapping("/api/produtos-complementos")
 public class ProdutoComplementoController extends CrudController<ProdutoComplemento> {
 
 }
