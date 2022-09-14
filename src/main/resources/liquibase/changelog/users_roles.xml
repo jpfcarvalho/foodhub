@@ -31,7 +31,7 @@
             </not>
         </preConditions>
         <addForeignKeyConstraint
-                baseColumnNames="ID_USERS"
+                baseColumnNames="USERS_ID"
                 baseTableName="USERS_ROLES"
                 constraintName="FK_USERS_ROLES_USERS"
                 referencedColumnNames="ID" referencedTableName="USERS"/>
