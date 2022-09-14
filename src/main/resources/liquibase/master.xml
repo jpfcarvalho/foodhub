@@ -7,6 +7,8 @@
 		<include file="changelog/estado.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/grupo.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/produto.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/grupo_complemento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/produto_complemento.xml" relativeToChangelogFile="true"/>
 		
 
 </databaseChangeLog>
