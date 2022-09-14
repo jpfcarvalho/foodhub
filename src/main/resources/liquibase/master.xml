@@ -6,5 +6,11 @@
 
 		<include file="changelog/estado.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/cidade.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/users.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/users_roles.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/pessoa.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/endereco.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/categoria.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/restaurante.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

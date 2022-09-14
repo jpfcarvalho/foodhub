@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,7 @@ public class Categoria implements BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_CATEGORIA")
+	@SequenceGenerator(name = "S_CATEGORIA", sequenceName = "S_CATEGORIA", allocationSize = 1)
 	private Long id;
 
 	@NotNull

@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unicesumar.foodhub.base.CrudController;
 import br.edu.unicesumar.foodhub.config.auth.Roles;
-import br.edu.unicesumar.foodhub.domain.Pessoa;
+import br.edu.unicesumar.foodhub.domain.Restaurante;
 import br.edu.unicesumar.foodhub.service.UsersService;
 
 @RestController
-@RequestMapping("/api/pessoas")
-public class PessoaController extends CrudController<Pessoa> {
+@RequestMapping("/api/restaurantes")
+public class RestauranteController extends CrudController<Restaurante> {
 
 	@Autowired
 	private UsersService usersService;
 
 	@Override
 	@PostMapping("/signup")
-	public ResponseEntity<Pessoa> save(@RequestBody Pessoa entity) throws URISyntaxException {
+	public ResponseEntity<Restaurante> save(@RequestBody Restaurante entity) throws URISyntaxException {
 		entity.getUsers().setUsername(entity.getUsers().getEmail());
-		entity.getUsers().getRoles().add(Roles.ROLE_CLIENTE);
+		entity.getUsers().getRoles().add(Roles.ROLE_RESTAURANTE);
 		entity.setUsers(usersService.signUp(entity.getUsers()));
 		return super.save(entity);
 	}

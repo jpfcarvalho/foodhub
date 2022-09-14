@@ -17,7 +17,7 @@
                 <constraints nullable="false" primaryKey="true"
                              primaryKeyName="PK_ENDERECO"/>
             </column>
-            <column name="NUMERO" type="NUMERIC(10,0)">
+            <column name="NUMERO" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="COMPLEMENTO" type="VARCHAR(255)"/>
@@ -25,9 +25,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="LOUGRADOURO" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="BAIRRO" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="BAIRRO" type="VARCHAR(255)">
@@ -44,6 +41,7 @@
             <column name="ID_CIDADE" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
+            <column name="ID_PESSOA" type="NUMERIC(10,0)"/>
         </createTable>
     </changeSet>
 
@@ -76,6 +74,22 @@
                 referencedColumnNames="ID" referencedTableName="CIDADE"/>
     </changeSet>
     
-
+    <changeSet author="joao.carvalho" id="FK_ENDERECO_PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_ENDERECO_PESSOA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_ENDERECO_PESSOA"
+                        foreignKeyTableName="ENDERECO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PESSOA"
+                baseTableName="ENDERECO"
+                constraintName="FK_ENDERECO_PESSOA"
+                referencedColumnNames="ID" referencedTableName="PESSOA"/>
+    </changeSet>
+    
 
 </databaseChangeLog>

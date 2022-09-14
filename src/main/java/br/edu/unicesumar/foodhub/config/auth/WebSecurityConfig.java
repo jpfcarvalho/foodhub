@@ -13,17 +13,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.edu.unicesumar.foodhub.base.BaseEntity;
-import br.edu.unicesumar.foodhub.domain.Users;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-public class WebSecurityConfig<T extends Users & BaseEntity> {
+public class WebSecurityConfig {
 
 	@Bean
-	public AuthenticationFilter<T> authenticationTokenFilterBean() {
-		return new AuthenticationFilter<T>();
+	public AuthenticationFilter authenticationTokenFilterBean() {
+		return new AuthenticationFilter();
 	}
 
 	@Bean
@@ -42,7 +39,8 @@ public class WebSecurityConfig<T extends Users & BaseEntity> {
 			throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/", "/**/auth/**", "/swagger-ui/**").permitAll().anyRequest().authenticated();
+				.antMatchers("/", "/**/auth/**", "/**/**/signup", "/swagger-ui/**").permitAll().anyRequest()
+				.authenticated();
 
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		return http.build();

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -33,6 +34,7 @@ public class Endereco implements BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ENDERECO")
+	@SequenceGenerator(name = "S_ENDERECO", sequenceName = "S_ENDERECO", allocationSize = 1)
 	private Long id;
 
 	@NotEmpty
@@ -55,7 +57,7 @@ public class Endereco implements BaseEntity {
 	@Column(name = "bairro", nullable = false)
 	private String bairro;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
 	@JoinColumn(name = "id_cidade", nullable = false)
 	private Cidade cidade;
 
