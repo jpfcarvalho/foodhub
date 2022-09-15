@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -39,15 +40,15 @@ public class Produto implements BaseEntity {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "valor", nullable = false)
 	private BigDecimal valor;
 
-	@NotEmpty
-	@Column(name = "ativo", nullable = false)
+	@NotNull
+	@Column(name = "ativo")
 	private Boolean ativo = Boolean.TRUE;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_produto")
+	@JoinColumn(name = "id_produto", nullable = false)
 	private List<GrupoComplemento> grupoComplementos;
 }

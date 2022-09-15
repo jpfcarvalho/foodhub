@@ -10,8 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -30,12 +29,11 @@ public class Cidade implements BaseEntity {
 	@SequenceGenerator(name = "S_CIDADE", sequenceName = "S_CIDADE", allocationSize = 1)
 	private Long id;
 
-	@NotNull
-	@NotBlank
-	@Column(name = "nome", nullable = false)
+	@NotEmpty
+	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 
-	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "id_estado", nullable = false)
 	private Estado estado;
 

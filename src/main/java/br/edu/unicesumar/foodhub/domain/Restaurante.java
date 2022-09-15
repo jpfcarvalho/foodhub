@@ -56,7 +56,7 @@ public class Restaurante implements BaseEntity {
 	@JoinColumn(name = "id_endereco", nullable = false)
 	private Endereco endereco;
 
-	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria", nullable = false)
 	private Categoria categoria;
 

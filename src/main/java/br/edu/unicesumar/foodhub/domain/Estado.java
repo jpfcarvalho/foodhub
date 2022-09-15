@@ -27,10 +27,10 @@ public class Estado implements BaseEntity {
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "nome", nullable = false)
+	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 
-	@Column(name = "uf")
+	@Column(name = "uf", nullable = false, unique = true)
 	private String uf;
 
 }

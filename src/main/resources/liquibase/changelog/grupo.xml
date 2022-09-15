@@ -38,8 +38,7 @@
         <createSequence incrementBy="1"
                         sequenceName="S_GRUPO" startValue="1"/>
     </changeSet>
-    
-<!--   
+       
     <changeSet author="felipe.magrinelli" id="FK_GRUPO_RESTAURANTE">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
@@ -55,8 +54,6 @@
                 baseTableName="GRUPO"
                 constraintName="FK_GRUPO_RESTAURANTE"
                 referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
-    </changeSet> --> 
-    
-
+    </changeSet>
 
 </databaseChangeLog>

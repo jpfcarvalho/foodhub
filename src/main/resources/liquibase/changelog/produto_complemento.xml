@@ -20,27 +20,19 @@
             <column name="NOME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            
             <column name="DESCRICAO" type="CHAR(1)">
             	<constraints nullable="false"/>
             </column>
-        
         	<column name="VALOR" type="NUMERIC(10,2)">
                 <constraints nullable="false"/>
             </column>
-        
             <column name="QUANTIDADE_MINIMA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
-            
             <column name="QUANTIDADE_MAXIMA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
-            
-            <column name="ATIVO" type="CHAR(1)">
-                <constraints nullable="false"/>
-            </column>
-            
+            <column name="ATIVO" type="CHAR(1)"/>
             <column name="ID_COMPLEMENTO" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>

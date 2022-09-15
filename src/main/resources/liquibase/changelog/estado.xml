@@ -19,10 +19,11 @@
             </column>
             <column name="UF" type="VARCHAR(2)">
                 <constraints nullable="false" unique="true" 
-                			 uniqueConstraintName="UK_uf"/>
+                			 uniqueConstraintName="UK_UF_ESTADO"/>
             </column>
             <column name="NOME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"
+                			 uniqueConstraintName="UK_NOME_ESTADO"/>
             </column>
         </createTable>
     </changeSet>

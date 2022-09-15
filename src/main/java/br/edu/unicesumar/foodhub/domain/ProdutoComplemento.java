@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -35,20 +36,20 @@ public class ProdutoComplemento implements BaseEntity {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "valor", nullable = false)
 	private BigDecimal valor;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "quantidade_minima", nullable = false)
 	private Long quantidade_minima;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "quantidade_maxima", nullable = false)
 	private Long quantidade_maxima;
 
-	@NotEmpty
-	@Column(name = "ativo", nullable = false)
+	@NotNull
+	@Column(name = "ativo")
 	private Boolean ativo = Boolean.TRUE;
 
 }

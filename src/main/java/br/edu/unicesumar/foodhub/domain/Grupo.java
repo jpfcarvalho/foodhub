@@ -35,6 +35,6 @@ public class Grupo implements BaseEntity {
 	private String nome;
 
 	@OneToMany
-	@JoinColumn(name = "id_grupo")
+	@JoinColumn(name = "id_grupo", nullable = false)
 	private List<Produto> produtos;
 }
