@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="STATUS_PEDIDO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela STATUS_PEDIDO já existe.">
+            <not>
+                <tableExists tableName="STATUS_PEDIDO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="STATUS_PEDIDO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_STATUS_PEDIDO"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_STATUS_PEDIDO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_STATUS_PEDIDO já existe">
+            <not>
+                <sequenceExists sequenceName="S_STATUS_PEDIDO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_STATUS_PEDIDO" startValue="1"/>
+    </changeSet>
+    
+</databaseChangeLog>

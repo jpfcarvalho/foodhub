@@ -16,6 +16,9 @@
 		<include file="changelog/produto.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/grupo_complemento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/produto_complemento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/status_pedido.xml" relativeToChangelogFile="true"/>
 		
+		<!-- INSERTS PADRÃO-->
+		<include file="insert/insert_status_pedido.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
