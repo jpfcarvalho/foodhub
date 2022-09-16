@@ -5,18 +5,24 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,11 +50,17 @@ public class Produto implements BaseEntity {
 	@Column(name = "valor", nullable = false)
 	private BigDecimal valor;
 
-	@NotNull
 	@Column(name = "ativo")
+	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean ativo = Boolean.TRUE;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private List<GrupoComplemento> grupoComplementos;
+
+	@ManyToOne(optional = false)
+	@JsonBackReference
+	@JsonIgnoreProperties({ "produtos" })
+	@JoinColumn(name = "id_grupo", nullable = false)
+	private Grupo grupo;
 }

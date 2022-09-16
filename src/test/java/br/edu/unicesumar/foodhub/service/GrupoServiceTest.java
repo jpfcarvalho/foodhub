@@ -16,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.edu.unicesumar.foodhub.domain.Grupo;
+import br.edu.unicesumar.foodhub.domain.Restaurante;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +31,7 @@ public class GrupoServiceTest {
 	@Test
 	public void salvarGrupo() {
 
-		Grupo entity = new Grupo(-1L, "Grupo teste", null);
+		Grupo entity = new Grupo(-1L, "Grupo teste", null, new Restaurante());
 
 		Grupo newEntity = service.save(entity);
 
@@ -43,9 +44,9 @@ public class GrupoServiceTest {
 	@Test
 	public void BuscarTodosGrupos() {
 
-		Grupo entity1 = new Grupo(-1L, "Grupo teste1", null);
-		Grupo entity2 = new Grupo(-1L, "Grupo teste2", null);
-		Grupo entity3 = new Grupo(-1L, "Grupo teste3", null);
+		Grupo entity1 = new Grupo(-1L, "Grupo teste1", null, new Restaurante());
+		Grupo entity2 = new Grupo(-1L, "Grupo teste2", null, new Restaurante());
+		Grupo entity3 = new Grupo(-1L, "Grupo teste3", null, new Restaurante());
 
 		service.getRepository().save(entity1);
 		service.getRepository().save(entity2);
@@ -63,7 +64,7 @@ public class GrupoServiceTest {
 	@Test
 	public void DeletarGrupo() {
 
-		Grupo entity = new Grupo(1L, "Grupo teste", null);
+		Grupo entity = new Grupo(1L, "Grupo teste", null, new Restaurante());
 		service.getRepository().save(entity);
 
 		List<Grupo> entitys = service.getRepository().findAll();

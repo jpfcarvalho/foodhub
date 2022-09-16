@@ -8,10 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -34,7 +39,15 @@ public class Grupo implements BaseEntity {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@OneToMany
-	@JoinColumn(name = "id_grupo", nullable = false)
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "grupo" })
+	@JoinColumn(name = "id_grupo", nullable = false, insertable = false, updatable = false)
 	private List<Produto> produtos;
+
+	@ManyToOne(optional = false)
+	@JsonBackReference
+	@JsonIgnoreProperties({ "grupos" })
+	@JoinColumn(name = "id_restaurante", nullable = false)
+	private Restaurante restaurante;
 }

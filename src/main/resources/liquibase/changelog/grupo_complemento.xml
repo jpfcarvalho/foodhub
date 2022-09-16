@@ -21,9 +21,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="OBRIGATORIO" type="CHAR(1)"/>
-        	<column name="VALOR" type="NUMERIC(10,2)">
-                <constraints nullable="false"/>
-            </column>
             <column name="QUANTIDADE_MINIMA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>

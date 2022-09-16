@@ -15,8 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -51,11 +57,16 @@ public class Pessoa implements BaseEntity {
 	@Column(name = "cpf", nullable = false)
 	private String cpf;
 
+	@Length(min = 10, max = 11)
 	@NotEmpty
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@NotNull
+	@Size(min = 1)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "pessoa" })
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private List<Endereco> enderecos = new ArrayList<>();
 

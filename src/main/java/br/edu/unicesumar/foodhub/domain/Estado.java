@@ -9,6 +9,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +32,8 @@ public class Estado implements BaseEntity {
 	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 
+	@NotEmpty
+	@Length(min = 2, max = 2)
 	@Column(name = "uf", nullable = false, unique = true)
 	private String uf;
 

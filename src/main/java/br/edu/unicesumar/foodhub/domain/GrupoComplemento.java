@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +15,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,20 +39,22 @@ public class GrupoComplemento implements BaseEntity {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@NotNull
-	@Column(name = "obrigatorio", nullable = false)
+	@Column(name = "obrigatorio")
+	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean obrigatorio = Boolean.FALSE;
 
 	@NotNull
 	@Column(name = "quantidade_minima", nullable = false)
-	private Long quantidade_minima;
+	private Long quantidadeMinima;
 
 	@NotNull
 	@Column(name = "quantidade_maxima", nullable = false)
-	private Long quantidade_maxima;
+	private Long quantidadeMaxima;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@NotNull
+	@Size(min = 1)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_complemento", nullable = false)
-	private List<ProdutoComplemento> produtos;
+	private List<ProdutoComplemento> produtosComplementos;
 
 }

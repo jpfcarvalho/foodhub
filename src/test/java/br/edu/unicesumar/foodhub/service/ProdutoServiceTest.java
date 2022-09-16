@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
+import br.edu.unicesumar.foodhub.domain.Grupo;
 import br.edu.unicesumar.foodhub.domain.Produto;
 
 @SpringBootTest
@@ -31,8 +32,8 @@ public class ProdutoServiceTest {
 	@Test
 	public void salvarProduto() {
 
-		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true,
-				null);
+		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true, null,
+				new Grupo());
 
 		Produto newEntity = service.save(entity);
 
@@ -46,11 +47,11 @@ public class ProdutoServiceTest {
 	public void BuscarTodosProdutos() {
 
 		Produto entity1 = new Produto(-1L, "Produto teste1", "Produto descricao1", BigDecimal.valueOf(18.90), true,
-				null);
+				null, new Grupo());
 		Produto entity2 = new Produto(-1L, "Produto teste2", "Produto descricao2", BigDecimal.valueOf(20.90), true,
-				null);
+				null, new Grupo());
 		Produto entity3 = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true,
-				null);
+				null, new Grupo());
 
 		service.getRepository().save(entity1);
 		service.getRepository().save(entity2);
@@ -68,8 +69,8 @@ public class ProdutoServiceTest {
 	@Test
 	public void DeletarProduto() {
 
-		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true,
-				null);
+		Produto entity = new Produto(-1L, "Produto teste3", "Produto descricao3", BigDecimal.valueOf(31.90), true, null,
+				new Grupo());
 
 		service.getRepository().save(entity);
 

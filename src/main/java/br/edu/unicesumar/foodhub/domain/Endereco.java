@@ -15,6 +15,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
 import br.edu.unicesumar.foodhub.domain.embedded.Coordenadas;
@@ -69,5 +72,11 @@ public class Endereco implements BaseEntity {
 
 	@Column(name = "apelido")
 	private String apelido;
+
+	@ManyToOne(optional = false)
+	@JsonBackReference
+	@JsonIgnoreProperties({ "enderecos" })
+	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
+	private Pessoa pessoa;
 
 }

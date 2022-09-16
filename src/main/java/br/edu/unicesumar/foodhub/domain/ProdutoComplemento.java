@@ -3,6 +3,7 @@ package br.edu.unicesumar.foodhub.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,14 +44,14 @@ public class ProdutoComplemento implements BaseEntity {
 
 	@NotNull
 	@Column(name = "quantidade_minima", nullable = false)
-	private Long quantidade_minima;
+	private Long quantidadeMinima;
 
 	@NotNull
 	@Column(name = "quantidade_maxima", nullable = false)
-	private Long quantidade_maxima;
+	private Long quantidadeMaxima;
 
-	@NotNull
 	@Column(name = "ativo")
+	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean ativo = Boolean.TRUE;
 
 }
