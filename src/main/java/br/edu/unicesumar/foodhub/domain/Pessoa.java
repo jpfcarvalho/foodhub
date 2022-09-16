@@ -67,7 +67,7 @@ public class Pessoa implements BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	@JsonIgnoreProperties({ "pessoa" })
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "id_pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ManyToOne(optional = false)

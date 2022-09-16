@@ -73,10 +73,10 @@ public class Endereco implements BaseEntity {
 	@Column(name = "apelido")
 	private String apelido;
 
-	@ManyToOne(optional = false)
+	@ManyToOne
 	@JsonBackReference
 	@JsonIgnoreProperties({ "enderecos" })
-	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_pessoa", insertable = false, updatable = false)
 	private Pessoa pessoa;
 
 }
