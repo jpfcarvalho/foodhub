@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="ABERTURA_ENCERRAMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela ABERTURA_ENCERRAMENTO já existe.">
+            <not>
+                <tableExists tableName="ABERTURA_ENCERRAMENTO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ABERTURA_ENCERRAMENTO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_ABERTURA_ENCERRAMENTO"/>
+            </column>
+            <column name="HORA_ABERTURA" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HORA_ENCERRAMENTO" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_DIA_FUNCIONAMENTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="joao.carvalho" id="CREATE_S_ABERTURA_ENCERRAMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_ABERTURA_ENCERRAMENTO já existe">
+            <not>
+                <sequenceExists sequenceName="S_ABERTURA_ENCERRAMENTO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_ABERTURA_ENCERRAMENTO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_DIA_ABERTURA_ENCERRAMENTO_DIA_FUNCIONAMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_DIA_ABERTURA_ENCERRAMENTO_DIA_FUNCIONAMENTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_DIA_ABERTURA_ENCERRAMENTO_DIA_FUNCIONAMENTO"
+                        foreignKeyTableName="ABERTURA_ENCERRAMENTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_DIA_FUNCIONAMENTO"
+                baseTableName="ABERTURA_ENCERRAMENTO"
+                constraintName="FK_DIA_ABERTURA_ENCERRAMENTO_DIA_FUNCIONAMENTO"
+                referencedColumnNames="ID" referencedTableName="DIA_FUNCIONAMENTO"/>
+    </changeSet>
+    
+</databaseChangeLog>

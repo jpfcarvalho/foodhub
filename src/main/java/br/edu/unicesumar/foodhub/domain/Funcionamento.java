@@ -1,7 +1,5 @@
 package br.edu.unicesumar.foodhub.domain;
 
-import java.time.LocalTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +24,6 @@ public class Funcionamento implements BaseEntity {
 	@SequenceGenerator(name = "S_FUNCIONAMENTO", sequenceName = "S_FUNCIONAMENTO", allocationSize = 1)
 	private Long id;
 
-	private LocalTime abertura;
-
-	private LocalTime fechamento;
+	private Long raioFuncionamentoKm;
 
 }
