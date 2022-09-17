@@ -47,7 +47,7 @@ public class DiaFuncionamento implements BaseEntity {
 	@NotNull
 	@Size(min = 1)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_dia_fincionamento", nullable = false)
+	@JoinColumn(name = "id_dia_funcionamento", nullable = false)
 	private List<AberturaEncerramento> aberturasEncerramentos;
 
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)

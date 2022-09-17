@@ -51,7 +51,7 @@
         </preConditions>
         <addForeignKeyConstraint
                 baseColumnNames="ID_RESTAURANTE"
-                baseTableName="DIA_FINCIONAMENTO"
+                baseTableName="DIA_FUNCIONAMENTO"
                 constraintName="FK_DIA_FUNCIONAMENTO_RESTAURANTE"
                 referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
     </changeSet>
