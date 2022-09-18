@@ -1,5 +1,7 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,12 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -63,5 +69,11 @@ public class Restaurante implements BaseEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;
+
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "restaurante" })
+	@JoinColumn(name = "id_restaurante")
+	private List<DiaFuncionamento> diasFuncionamentos;
 
 }

@@ -1,4 +1,4 @@
-package br.edu.unicesumar.foodhub.base;
+package br.edu.unicesumar.foodhub.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
