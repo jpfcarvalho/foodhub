@@ -59,6 +59,10 @@ public class Pessoa implements BaseEntity {
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private List<Endereco> enderecos = new ArrayList<>();
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_pessoa", nullable = false)
+	private List<Pagamento> pagamentos = new ArrayList<>();
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;

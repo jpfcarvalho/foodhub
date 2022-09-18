@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,14 +42,14 @@ public class GrupoComplemento implements BaseEntity {
 
 	@NotEmpty
 	@Column(name = "quantidade_minima", nullable = false)
-	private Long quantidade_minima;
+	private Long quantidadeMinima;
 
 	@NotEmpty
 	@Column(name = "quantidade_maxima", nullable = false)
-	private Long quantidade_maxima;
+	private Long quantidadeMaxima;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_complemento")
-	private List<ProdutoComplemento> produtos;
+	private List<ProdutoComplemento> produtos = new ArrayList<>();
 
 }

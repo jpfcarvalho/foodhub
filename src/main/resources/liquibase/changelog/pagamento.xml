@@ -26,6 +26,9 @@
                 <constraints nullable="false"/>
             </column>
             
+            <column name="ID_PESSOA" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
             
         </createTable>
     </changeSet>
@@ -41,6 +44,23 @@
         </preConditions>
         <createSequence incrementBy="1"
                         sequenceName="S_PAGAMENTO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PAGAMENTO_PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PAGAMENTO_PESSOA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PAGAMENTO_PESSOA"
+                        foreignKeyTableName="PAGAMENTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PESSOA"
+                baseTableName="PAGAMENTO"
+                constraintName="FK_PAGAMENTO_PESSOA"
+                referencedColumnNames="ID" referencedTableName="PESSOA"/>
     </changeSet>
     
 </databaseChangeLog>
