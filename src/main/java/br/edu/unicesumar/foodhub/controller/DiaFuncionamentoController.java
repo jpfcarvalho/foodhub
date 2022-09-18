@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unicesumar.foodhub.base.LoadController;
-import br.edu.unicesumar.foodhub.domain.GrupoComplemento;
+import br.edu.unicesumar.foodhub.domain.DiaFuncionamento;
 
 @RestController
-@RequestMapping("/api/complementos")
-public class GrupoComplementoController extends LoadController<GrupoComplemento> {
+@RequestMapping("/api/dias-funcionamentos")
+public class DiaFuncionamentoController extends LoadController<DiaFuncionamento> {
 
 }

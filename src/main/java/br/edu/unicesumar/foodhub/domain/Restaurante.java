@@ -20,9 +20,6 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -78,5 +75,9 @@ public class Restaurante implements BaseEntity {
 	@JsonIgnoreProperties({ "restaurante" })
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private List<Grupo> grupos;
+
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "id_funcionamento", nullable = false)
+	private Funcionamento funcionamento;
 
 }

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
-import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
+import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

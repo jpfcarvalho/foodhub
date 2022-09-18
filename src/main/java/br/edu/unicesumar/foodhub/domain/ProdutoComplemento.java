@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
-import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
+import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

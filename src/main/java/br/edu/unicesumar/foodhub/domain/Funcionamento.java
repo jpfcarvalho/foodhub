@@ -1,9 +1,15 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +30,11 @@ public class Funcionamento implements BaseEntity {
 	@SequenceGenerator(name = "S_FUNCIONAMENTO", sequenceName = "S_FUNCIONAMENTO", allocationSize = 1)
 	private Long id;
 
+	@Column(name = "raio_funcionamento_km", nullable = false)
 	private Long raioFuncionamentoKm;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_funcionamento", nullable = false)
+	List<DiaFuncionamento> diasDiaFuncionamentos;
 
 }

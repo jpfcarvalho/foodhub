@@ -20,7 +20,7 @@
             <column name="DIA_SEMANA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ID_RESTAURANTE" type="NUMERIC(10,0)">
+            <column name="ID_FUNCIONAMENTO" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -39,21 +39,21 @@
                         sequenceName="S_DIA_FUNCIONAMENTO" startValue="1"/>
     </changeSet>
     
-    <changeSet author="joao.carvalho" id="FK_DIA_FUNCIONAMENTO_RESTAURANTE">
+    <changeSet author="joao.carvalho" id="FK_DIA_FUNCIONAMENTO_FUNCIONAMENTO">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A constraint FK_DIA_FUNCIONAMENTO_RESTAURANTE já existe">
+                       onFailMessage="A constraint FK_DIA_FUNCIONAMENTO_FUNCIONAMENTO já existe">
             <not>
                 <foreignKeyConstraintExists
-                        foreignKeyName="FK_DIA_FUNCIONAMENTO_RESTAURANTE"
+                        foreignKeyName="FK_DIA_FUNCIONAMENTO_FUNCIONAMENTO"
                         foreignKeyTableName="DIA_FUNCIONAMENTO"/>
             </not>
         </preConditions>
         <addForeignKeyConstraint
-                baseColumnNames="ID_RESTAURANTE"
+                baseColumnNames="ID_FUNCIONAMENTO"
                 baseTableName="DIA_FUNCIONAMENTO"
-                constraintName="FK_DIA_FUNCIONAMENTO_RESTAURANTE"
-                referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
+                constraintName="FK_DIA_FUNCIONAMENTO_FUNCIONAMENTO"
+                referencedColumnNames="ID" referencedTableName="FUNCIONAMENTO"/>
     </changeSet>
     
 </databaseChangeLog>

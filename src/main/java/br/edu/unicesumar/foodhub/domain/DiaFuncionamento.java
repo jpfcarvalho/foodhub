@@ -10,15 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.SemanaToLongConverter;
@@ -44,16 +40,10 @@ public class DiaFuncionamento implements BaseEntity {
 	@Column(name = "dia_semana", nullable = false)
 	private Semana diaSemana;
 
-	@NotNull
 	@Size(min = 1)
+	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_dia_funcionamento", nullable = false)
 	private List<AberturaEncerramento> aberturasEncerramentos;
-
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-	@JsonBackReference
-	@JsonIgnoreProperties({ "diasFuncionamentos" })
-	@JoinColumn(name = "id_restaurante", nullable = false)
-	private Restaurante restaurante;
 
 }
