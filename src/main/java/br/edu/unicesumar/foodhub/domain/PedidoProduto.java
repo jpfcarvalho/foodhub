@@ -44,5 +44,5 @@ public class PedidoProduto implements BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_pedido_produto", nullable = false)
-	private List<PedidoComplementoProduto> complementos = new ArrayList<>();;
+	private List<PedidoComplementoProduto> complementos = new ArrayList<>();
 }

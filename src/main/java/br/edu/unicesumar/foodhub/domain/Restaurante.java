@@ -80,4 +80,10 @@ public class Restaurante implements BaseEntity {
 	@JoinColumn(name = "id_funcionamento", nullable = false)
 	private Funcionamento funcionamento;
 
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "restaurante" })
+	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
+	private List<Pedido> pedidos;
+
 }

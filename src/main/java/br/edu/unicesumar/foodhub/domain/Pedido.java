@@ -20,6 +20,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,7 +49,7 @@ public class Pedido implements BaseEntity {
 	private LocalDateTime dataHora;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_status_pedido", nullable = false)
+	@JoinColumn(name = "id_status_pedido", nullable = false, insertable = false, updatable = false)
 	private StatusPedido statusPedido;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -54,11 +57,13 @@ public class Pedido implements BaseEntity {
 	private Pagamento pagamento;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
 	private Pessoa pessoa;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_restaurante", nullable = false)
+	@JsonBackReference
+	@JsonIgnoreProperties({ "pedidos" })
+	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private Restaurante restaurante;
 
 	@Size(min = 1)

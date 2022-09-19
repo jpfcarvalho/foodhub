@@ -1,6 +1,7 @@
 package br.edu.unicesumar.foodhub.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,7 +57,7 @@ public class Produto implements BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_produto", nullable = false)
-	private List<GrupoComplemento> grupoComplementos;
+	private List<GrupoComplemento> grupoComplemento = new ArrayList<>();
 
 	@ManyToOne(optional = false)
 	@JsonBackReference
