@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -33,4 +35,8 @@ public class Pagamento implements BaseEntity {
 	@NotEmpty
 	@Column(name = "status", nullable = false)
 	private String status;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_pessoa", nullable = false)
+	private Pessoa pessoa;
 }

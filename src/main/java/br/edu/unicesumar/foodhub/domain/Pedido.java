@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -43,24 +45,26 @@ public class Pedido implements BaseEntity {
 	@Column(name = "data_hora", nullable = false)
 	private LocalDateTime dataHora;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_status_pedido", nullable = false)
-	private StatusPedido idStatusPedido;
+	private StatusPedido statusPedido;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_pagamento")
-	private Pagamento idPagamento;
+	private Pagamento pagamento;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_pessoa", nullable = false)
-	private Pessoa idPessoa;
+	private Pessoa pessoa;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_restaurante", nullable = false)
-	private Restaurante idRestaurante;
+	private Restaurante restaurante;
 
-	@OneToMany
-	@JoinColumn(name = "id_pedido")
+	@Size(min = 1)
+	@NotNull
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_pedido", nullable = false)
 	private List<PedidoProduto> produtos = new ArrayList<>();
 
 }
