@@ -41,11 +41,11 @@ public class ProdutoComplemento implements BaseEntity {
 
 	@NotEmpty
 	@Column(name = "quantidade_minima", nullable = false)
-	private Long quantidade_minima;
+	private Long quantidadeMinima;
 
 	@NotEmpty
 	@Column(name = "quantidade_maxima", nullable = false)
-	private Long quantidade_maxima;
+	private Long quantidadeMaxima;
 
 	@NotEmpty
 	@Column(name = "ativo", nullable = false)

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="PEDIDO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela PEDIDO_PRODUTO já existe.">
+            <not>
+                <tableExists tableName="PEDIDO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PEDIDO_PRODUTO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_PEDIDO_PRODUTO"/>
+            </column>
+        
+            <column name="PRECO_PRODUTO" type="NUMERIC(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="ID_PRODUTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_PEDIDO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_PEDIDO_PRODUTO já existe">
+            <not>
+                <sequenceExists sequenceName="S_PEDIDO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_PEDIDO_PRODUTO" startValue="1"/>
+    </changeSet>
+    
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_PRODUTO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_PRODUTO_PRODUTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_PRODUTO_PRODUTO"
+                        foreignKeyTableName="PEDIDO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PRODUTO"
+                baseTableName="PEDIDO_PRODUTO"
+                constraintName="FK_PEDIDO_PRODUTO_PRODUTO"
+                referencedColumnNames="ID" referencedTableName="PRODUTO"/>
+    </changeSet>
+</databaseChangeLog>
