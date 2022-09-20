@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -85,5 +87,10 @@ public class Restaurante implements BaseEntity {
 	@JsonIgnoreProperties({ "restaurante" })
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private List<Pedido> pedidos;
+
+	@ManyToMany(mappedBy = "favoritos")
+	@JsonBackReference
+	@JsonIgnoreProperties({ "favoritos" })
+	private List<Pessoa> favoritados;
 
 }

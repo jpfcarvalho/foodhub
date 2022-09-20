@@ -35,6 +35,6 @@ public class Funcionamento implements BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
-	List<DiaFuncionamento> diasDiaFuncionamentos;
+	List<DiaFuncionamento> diasFuncionamentos;
 
 }

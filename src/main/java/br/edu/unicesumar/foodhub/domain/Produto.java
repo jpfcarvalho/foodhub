@@ -57,7 +57,7 @@ public class Produto implements BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_produto", nullable = false)
-	private List<GrupoComplemento> grupoComplemento = new ArrayList<>();
+	private List<GrupoComplemento> gruposComplementos = new ArrayList<>();
 
 	@ManyToOne(optional = false)
 	@JsonBackReference

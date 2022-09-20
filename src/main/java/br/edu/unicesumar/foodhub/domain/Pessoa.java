@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -77,5 +79,12 @@ public class Pessoa implements BaseEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;
+
+	@ManyToMany
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "favoritados" })
+	@JoinTable(name = "pessoa_restaurante", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_restaurante") })
+	private List<Restaurante> favoritos;
 
 }
