@@ -38,6 +38,9 @@
             <column name="ID_USERS" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
+            <column name="ID_FUNCIONAMENTO" type="NUMERIC(10,0)">
+            	<constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -102,6 +105,23 @@
                 baseTableName="RESTAURANTE"
                 constraintName="FK_RESTAURANTE_USERS"
                 referencedColumnNames="ID" referencedTableName="USERS"/>
+    </changeSet>
+
+	<changeSet author="joao.carvalho" id="FK_RESTAURANTE_FUNCIONAMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_RESTAURANTE_FUNCIONAMENTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_RESTAURANTE_FUNCIONAMENTO"
+                        foreignKeyTableName="RESTAURANTE"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_FUNCIONAMENTO"
+                baseTableName="RESTAURANTE"
+                constraintName="FK_RESTAURANTE_FUNCIONAMENTO"
+                referencedColumnNames="ID" referencedTableName="FUNCIONAMENTO"/>
     </changeSet>
 
 </databaseChangeLog>

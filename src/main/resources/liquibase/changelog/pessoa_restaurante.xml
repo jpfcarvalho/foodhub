@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="joao.carvalho" id="PESSOA_RESTAURANTE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela PESSOA_RESTAURANTE já existe.">
+            <not>
+                <tableExists tableName="PESSOA_RESTAURANTE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PESSOA_RESTAURANTE">
+            <column name="ID_PESSOA" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_RESTAURANTE" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_PESSOA_RESTAURANTE_PESSOA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PESSOA_RESTAURANTE_PESSOA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PESSOA_RESTAURANTE_PESSOA"
+                        foreignKeyTableName="PESSOA_RESTAURANTE"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PESSOA"
+                baseTableName="PESSOA_RESTAURANTE"
+                constraintName="FK_PESSOA_RESTAURANTE_PESSOA"
+                referencedColumnNames="ID" referencedTableName="PESSOA"/>
+    </changeSet>
+    
+	<changeSet author="joao.carvalho" id="FK_PESSOA_RESTAURANTE_RESTAURANTE">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PESSOA_RESTAURANTE_RESTAURANTE já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PESSOA_RESTAURANTE_RESTAURANTE"
+                        foreignKeyTableName="PESSOA_RESTAURANTE"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_RESTAURANTE"
+                baseTableName="PESSOA_RESTAURANTE"
+                constraintName="FK_PESSOA_RESTAURANTE_RESTAURANTE"
+                referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
+    </changeSet>
+
+</databaseChangeLog>

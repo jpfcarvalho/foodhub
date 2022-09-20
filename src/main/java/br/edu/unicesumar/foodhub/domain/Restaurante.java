@@ -9,15 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -49,11 +50,12 @@ public class Restaurante implements BaseEntity {
 	@Column(name = "nome_fantasia", nullable = false)
 	private String nomeFantasia;
 
-	@CPF
-	@CNPJ
+	@Length(min = 11, max = 14)
+	@NotEmpty
 	@Column(name = "cpf_cnpj", nullable = false)
 	private String cpfCnpj;
 
+	@Length(min = 10, max = 11)
 	@NotEmpty
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
@@ -62,7 +64,7 @@ public class Restaurante implements BaseEntity {
 	@JoinColumn(name = "id_endereco", nullable = false)
 	private Endereco endereco;
 
-	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria", nullable = false)
 	private Categoria categoria;
 
@@ -73,7 +75,22 @@ public class Restaurante implements BaseEntity {
 	@OneToMany(orphanRemoval = true)
 	@JsonManagedReference
 	@JsonIgnoreProperties({ "restaurante" })
-	@JoinColumn(name = "id_restaurante")
-	private List<DiaFuncionamento> diasFuncionamentos;
+	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
+	private List<Grupo> grupos;
+
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "id_funcionamento", nullable = false)
+	private Funcionamento funcionamento;
+
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "restaurante" })
+	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
+	private List<Pedido> pedidos;
+
+	@ManyToMany(mappedBy = "favoritos")
+	@JsonBackReference
+	@JsonIgnoreProperties({ "favoritos" })
+	private List<Pessoa> favoritados;
 
 }

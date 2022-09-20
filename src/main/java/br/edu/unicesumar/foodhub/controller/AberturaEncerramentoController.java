@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unicesumar.foodhub.base.LoadController;
-import br.edu.unicesumar.foodhub.domain.GrupoComplemento;
+import br.edu.unicesumar.foodhub.domain.AberturaEncerramento;
 
 @RestController
-@RequestMapping("/api/complementos")
-public class GrupoComplementoController extends LoadController<GrupoComplemento> {
+@RequestMapping("/api/aberturas-ancerramentos")
+public class AberturaEncerramentoController extends LoadController<AberturaEncerramento> {
 
 }

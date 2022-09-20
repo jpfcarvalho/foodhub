@@ -3,9 +3,9 @@ package br.edu.unicesumar.foodhub.service;
 import org.springframework.stereotype.Service;
 
 import br.edu.unicesumar.foodhub.base.LoadService;
-import br.edu.unicesumar.foodhub.domain.ProdutoComplemento;
+import br.edu.unicesumar.foodhub.domain.AberturaEncerramento;
 
 @Service
-public class ProdutoComplementoService extends LoadService<ProdutoComplemento> {
+public class AberturaEncerramentoService extends LoadService<AberturaEncerramento> {
 
 }

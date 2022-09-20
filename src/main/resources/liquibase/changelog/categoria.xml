@@ -18,7 +18,8 @@
                              primaryKeyName="PK_CATEGORIA"/>
             </column>
             <column name="TIPO" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true" 
+                			 uniqueConstraintName="UK_TIPO_CATEGORIA"/>
             </column>
         </createTable>
     </changeSet>

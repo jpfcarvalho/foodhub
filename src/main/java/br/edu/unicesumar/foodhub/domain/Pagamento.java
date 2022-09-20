@@ -37,6 +37,6 @@ public class Pagamento implements BaseEntity {
 	private String status;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
 	private Pessoa pessoa;
 }

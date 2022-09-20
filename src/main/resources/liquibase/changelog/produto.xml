@@ -20,15 +20,11 @@
             <column name="NOME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            
             <column name="DESCRICAO" type="VARCHAR(255)"/>
-        
             <column name="VALOR" type="NUMERIC(10,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ATIVO" type="CHAR(1)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="ATIVO" type="CHAR(1)"/>
             <column name="ID_GRUPO" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>

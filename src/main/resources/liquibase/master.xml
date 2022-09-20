@@ -11,11 +11,18 @@
 		<include file="changelog/pessoa.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/endereco.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/categoria.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/funcionamento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/dia_funcionamento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/abertura_encerramento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/restaurante.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/pessoa_restaurante.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/grupo.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/produto.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/grupo_complemento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/produto_complemento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/funcionamento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/dia_funcionamento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/abertura_encerramento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/status_pedido.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/pagamento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/pedido_produto.xml" relativeToChangelogFile="true"/>

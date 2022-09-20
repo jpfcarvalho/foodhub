@@ -4,41 +4,36 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="joao.carvalho" id="ESTADO">
+    <changeSet author="joao.carvalho" id="FUNCIONAMENTO">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A tabela ESTADO já existe.">
+                       onFailMessage="A tabela FUNCIONAMENTO já existe.">
             <not>
-                <tableExists tableName="ESTADO"/>
+                <tableExists tableName="FUNCIONAMENTO"/>
             </not>
         </preConditions>
-        <createTable tableName="ESTADO">
+        <createTable tableName="FUNCIONAMENTO">
             <column name="ID" type="NUMERIC(10,0)">
                 <constraints nullable="false" primaryKey="true"
-                             primaryKeyName="PK_ESTADO"/>
+                             primaryKeyName="PK_FUNCIONAMENTO"/>
             </column>
-            <column name="UF" type="VARCHAR(2)">
-                <constraints nullable="false" unique="true" 
-                			 uniqueConstraintName="UK_UF_ESTADO"/>
-            </column>
-            <column name="NOME" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"
-                			 uniqueConstraintName="UK_NOME_ESTADO"/>
+            <column name="RAIO_FUNCIONAMENTO_KM" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet author="joao.carvalho" id="CREATE_S_ESTADO">
+
+    <changeSet author="joao.carvalho" id="CREATE_S_FUNCIONAMENTO">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A sequence S_ESTADO já existe">
+                       onFailMessage="A sequence S_FUNCIONAMENTO já existe">
             <not>
-                <sequenceExists sequenceName="S_ESTADO"/>
+                <sequenceExists sequenceName="S_FUNCIONAMENTO"/>
             </not>
         </preConditions>
         <createSequence incrementBy="1"
-                        sequenceName="S_ESTADO" startValue="1"/>
+                        sequenceName="S_FUNCIONAMENTO" startValue="1"/>
     </changeSet>
-
-
+    
 </databaseChangeLog>
