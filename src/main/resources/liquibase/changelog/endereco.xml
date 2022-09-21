@@ -37,7 +37,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="APELIDO" type="VARCHAR(255)"/>
-            <column name="PRINCIPAL" type="VARCHAR(1)"/>
+            <column name="PRINCIPAL" type="CHAR(1)"/>
             <column name="ID_CIDADE" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>

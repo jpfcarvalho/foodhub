@@ -1,6 +1,5 @@
 package br.edu.unicesumar.foodhub.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
@@ -16,8 +15,11 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
-import br.edu.unicesumar.foodhub.base.BooleanToStringConverter;
+import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import br.edu.unicesumar.foodhub.domain.embedded.Coordenadas;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,7 +59,7 @@ public class Endereco implements BaseEntity {
 	@Column(name = "bairro", nullable = false)
 	private String bairro;
 
-	@ManyToOne(cascade = CascadeType.DETACH, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_cidade", nullable = false)
 	private Cidade cidade;
 
@@ -66,9 +68,15 @@ public class Endereco implements BaseEntity {
 
 	@Column(name = "principal")
 	@Convert(converter = BooleanToStringConverter.class)
-	private Boolean principal;
+	private Boolean principal = Boolean.FALSE;
 
 	@Column(name = "apelido")
 	private String apelido;
+
+	@ManyToOne
+	@JsonBackReference
+	@JsonIgnoreProperties({ "enderecos" })
+	@JoinColumn(name = "id_pessoa", insertable = false, updatable = false)
+	private Pessoa pessoa;
 
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="PEDIDO_COMPLEMENTO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela PEDIDO_COMPLEMENTO_PRODUTO já existe.">
+            <not>
+                <tableExists tableName="PEDIDO_COMPLEMENTO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PEDIDO_COMPLEMENTO_PRODUTO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_PEDIDO_COMPLEMENTO_PRODUTO"/>
+            </column>
+            
+            <column name="VALOR_COMPLEMENTO" type="NUMERIC(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="QUANTIDADE" type="NUMERIC(10,0)">
+            	<constraints nullable="false"/>
+            </column>
+        
+            <column name="ID_PRODUTO_COMPLEMENTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="ID_PEDIDO_PRODUTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_PEDIDO_COMPLEMENTO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_PEDIDO_COMPLEMENTO_PRODUTO já existe">
+            <not>
+                <sequenceExists sequenceName="S_PEDIDO_COMPLEMENTO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_PEDIDO_COMPLEMENTO_PRODUTO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_COMPLEMENTO_PRODUTO_PRODUTO_COMPLEMENTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_COMPLEMENTO_PRODUTO_PRODUTO_COMPLEMENTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_COMPLEMENTO_PRODUTO_PRODUTO_COMPLEMENTO"
+                        foreignKeyTableName="PEDIDO_COMPLEMENTO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PRODUTO_COMPLEMENTO"
+                baseTableName="PEDIDO_COMPLEMENTO_PRODUTO"
+                constraintName="FK_PEDIDO_COMPLEMENTO_PRODUTO_PRODUTO_COMPLEMENTO"
+                referencedColumnNames="ID" referencedTableName="PRODUTO_COMPLEMENTO"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_COMPLEMENTO_PRODUTO_PEDIDO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_COMPLEMENTO_PRODUTO_PEDIDO_PRODUTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_COMPLEMENTO_PRODUTO_PEDIDO_PRODUTO"
+                        foreignKeyTableName="PEDIDO_COMPLEMENTO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PEDIDO_PRODUTO"
+                baseTableName="PEDIDO_COMPLEMENTO_PRODUTO"
+                constraintName="FK_PEDIDO_COMPLEMENTO_PRODUTO_PEDIDO_PRODUTO"
+                referencedColumnNames="ID" referencedTableName="PEDIDO_PRODUTO"/>
+    </changeSet>
+</databaseChangeLog>

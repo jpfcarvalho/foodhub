@@ -7,8 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -27,9 +26,8 @@ public class Categoria implements BaseEntity {
 	@SequenceGenerator(name = "S_CATEGORIA", sequenceName = "S_CATEGORIA", allocationSize = 1)
 	private Long id;
 
-	@NotNull
-	@NotBlank
-	@Column(name = "tipo", nullable = false)
+	@NotEmpty
+	@Column(name = "tipo", nullable = false, unique = true)
 	private String tipo;
 
 }
