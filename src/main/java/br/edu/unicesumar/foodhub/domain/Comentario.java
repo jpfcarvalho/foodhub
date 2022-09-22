@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,16 +35,15 @@ public class Comentario implements BaseEntity {
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "texto")
+	@Column(name = "texto", nullable = false)
 	private String texto;
 
-	@NotNull
 	@Column(name = "nota")
 	private BigDecimal nota;
 
 	@NotEmpty
 	@Column(name = "data_publicacao", nullable = false)
-	private LocalDateTime dataPublicacao;
+	private LocalDateTime dataPublicacao = LocalDateTime.now();
 
 	@ManyToOne(optional = false)
 	@JsonBackReference

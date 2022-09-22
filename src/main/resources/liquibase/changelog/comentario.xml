@@ -17,9 +17,6 @@
                 <constraints nullable="false" primaryKey="true"
                              primaryKeyName="PK_COMENTARIO"/>
             </column>
-            <column name="NOME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             
             <column name="TEXTO" type="VARCHAR(255)">
             	<constraints nullable="false"/>
