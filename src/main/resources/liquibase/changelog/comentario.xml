@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="COMENTARIO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela COMENTARIO já existe.">
+            <not>
+                <tableExists tableName="COMENTARIO"/>
+            </not>
+        </preConditions>
+        <createTable tableName="COMENTARIO">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_COMENTARIO"/>
+            </column>
+            <column name="NOME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="TEXTO" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="NOTA" type="NUMERIC(10,2)"/>
+            
+            <column name="CURTIU" type="CHAR(1)"/>
+            
+            <column name="DATA_PUBLICACAO" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="ID_PESSOA" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_COMENTARIO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_COMENTARIO já existe">
+            <not>
+                <sequenceExists sequenceName="S_COMENTARIO"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_COMENTARIO" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PRODUTO_GRUPO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PRODUTO_GRUPO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PRODUTO_GRUPO"
+                        foreignKeyTableName="PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_GRUPO"
+                baseTableName="PRODUTO"
+                constraintName="FK_PRODUTO_GRUPO"
+                referencedColumnNames="ID" referencedTableName="GRUPO"/>
+    </changeSet>
+</databaseChangeLog>

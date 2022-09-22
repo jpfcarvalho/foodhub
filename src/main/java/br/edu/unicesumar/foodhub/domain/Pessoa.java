@@ -87,4 +87,8 @@ public class Pessoa implements BaseEntity {
 			@JoinColumn(name = "id_restaurante") })
 	private List<Restaurante> favoritos;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comentario")
+	private List<Comentario> comentarios;
+
 }
