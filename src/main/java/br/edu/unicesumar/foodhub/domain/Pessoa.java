@@ -87,4 +87,10 @@ public class Pessoa implements BaseEntity {
 			@JoinColumn(name = "id_restaurante") })
 	private List<Restaurante> favoritos;
 
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "pessoa" })
+	@JoinColumn(name = "id_comentario", nullable = false, insertable = false, updatable = false)
+	private List<Comentario> comentarios;
+
 }

@@ -72,4 +72,8 @@ public class Pedido implements BaseEntity {
 	@JoinColumn(name = "id_pedido", nullable = false)
 	private List<PedidoProduto> produtos = new ArrayList<>();
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comentario")
+	private Comentario comentario;
+
 }
