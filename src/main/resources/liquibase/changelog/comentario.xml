@@ -26,8 +26,7 @@
             </column>
             
             <column name="NOTA" type="NUMERIC(10,2)"/>
-            
-            <column name="CURTIU" type="CHAR(1)"/>
+    
             
             <column name="DATA_PUBLICACAO" type="TIMESTAMP">
                 <constraints nullable="false"/>
@@ -52,20 +51,20 @@
                         sequenceName="S_COMENTARIO" startValue="1"/>
     </changeSet>
     
-    <changeSet author="felipe.magrinelli" id="FK_PRODUTO_GRUPO">
+    <changeSet author="felipe.magrinelli" id="FK_COMENTARIO_PESSOA">
         <validCheckSum>ANY</validCheckSum>
         <preConditions onFail="MARK_RAN"
-                       onFailMessage="A constraint FK_PRODUTO_GRUPO já existe">
+                       onFailMessage="A constraint FK_COMENTARIO_PESSOA já existe">
             <not>
                 <foreignKeyConstraintExists
-                        foreignKeyName="FK_PRODUTO_GRUPO"
-                        foreignKeyTableName="PRODUTO"/>
+                        foreignKeyName="FK_COMENTARIO_PESSOA"
+                        foreignKeyTableName="COMENTARIO"/>
             </not>
         </preConditions>
         <addForeignKeyConstraint
-                baseColumnNames="ID_GRUPO"
-                baseTableName="PRODUTO"
-                constraintName="FK_PRODUTO_GRUPO"
-                referencedColumnNames="ID" referencedTableName="GRUPO"/>
+                baseColumnNames="ID_PESSOA"
+                baseTableName="COMENTARIO"
+                constraintName="FK_COMENTARIO_PESSOA"
+                referencedColumnNames="ID" referencedTableName="PESSOA"/>
     </changeSet>
 </databaseChangeLog>
