@@ -42,6 +42,8 @@
                 <constraints nullable="false"/>
             </column>
             
+            <column name="ID_COMENTARIO" type="NUMERIC(10,0)"/>
+            
         </createTable>
     </changeSet>
 
@@ -125,5 +127,22 @@
                 baseTableName="PEDIDO"
                 constraintName="FK_PEDIDO_RESTAURANTE"
                 referencedColumnNames="ID" referencedTableName="RESTAURANTE"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_COMENTARIO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_COMENTARIO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_COMENTARIO"
+                        foreignKeyTableName="PEDIDO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_COMENTARIO"
+                baseTableName="PEDIDO"
+                constraintName="FK_PEDIDO_COMENTARIO"
+                referencedColumnNames="ID" referencedTableName="COMENTARIO"/>
     </changeSet>
 </databaseChangeLog>
