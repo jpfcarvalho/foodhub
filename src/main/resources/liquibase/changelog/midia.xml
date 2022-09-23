@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="felipe.magrinelli" id="MIDIA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A tabela MIDIA já existe.">
+            <not>
+                <tableExists tableName="MIDIA"/>
+            </not>
+        </preConditions>
+        <createTable tableName="MIDIA">
+            <column name="ID" type="NUMERIC(10,0)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_MIDIA"/>
+            </column>
+       
+        	<column name="TITULO" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="DESCRICAO" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="ATIVO" type="CHAR(1)"/>
+            
+            <column name="TAGS" type="VARCHAR(255)"/>
+            
+            <column name="DATA_PUBLICACAO" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="CAMINHO" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="FOTO_PRINCIPAL" type="CHAR(1)"/>
+            
+            <column name="ID_PRODUTO" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="felipe.magrinelli" id="CREATE_S_MIDIA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A sequence S_MIDIA já existe">
+            <not>
+                <sequenceExists sequenceName="S_MIDIA"/>
+            </not>
+        </preConditions>
+        <createSequence incrementBy="1"
+                        sequenceName="S_MIDIA" startValue="1"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_MIDIA_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_MIDIA_PRODUTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_MIDIA_PRODUTO"
+                        foreignKeyTableName="MIDIA"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PRODUTO"
+                baseTableName="MIDIA"
+                constraintName="FK_MIDIA_PRODUTO"
+                referencedColumnNames="ID" referencedTableName="PRODUTO"/>
+    </changeSet>
+    
+</databaseChangeLog>

@@ -32,6 +32,13 @@
             <column name="ID_PESSOA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
+            
+            <column name="ID_MIDIA" type="NUMERIC(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            
+            
+            
         </createTable>
     </changeSet>
 
@@ -63,5 +70,22 @@
                 baseTableName="COMENTARIO"
                 constraintName="FK_COMENTARIO_PESSOA"
                 referencedColumnNames="ID" referencedTableName="PESSOA"/>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_COMENTARIO_MIDIA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_COMENTARIO_MIDIA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_COMENTARIO_MIDIA"
+                        foreignKeyTableName="COMENTARIO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_MIDIA"
+                baseTableName="COMENTARIO"
+                constraintName="FK_COMENTARIO_MIDIA"
+                referencedColumnNames="ID" referencedTableName="MIDIA"/>
     </changeSet>
 </databaseChangeLog>

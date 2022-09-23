@@ -26,6 +26,8 @@
                 <constraints nullable="false"/>
             </column>
             
+            <column name="ID_MIDIA" type="NUMERIC(10,0)"/>
+            
         </createTable>
     </changeSet>
 
@@ -59,4 +61,23 @@
                 constraintName="FK_PEDIDO_PRODUTO_PRODUTO"
                 referencedColumnNames="ID" referencedTableName="PRODUTO"/>
     </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_PRODUTO_MIDIA">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_PRODUTO_MIDIA já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_PRODUTO_PRODUTO"
+                        foreignKeyTableName="PEDIDO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PRODUTO"
+                baseTableName="PEDIDO_PRODUTO"
+                constraintName="FK_PEDIDO_PRODUTO_MIDIA"
+                referencedColumnNames="ID" referencedTableName="MIDIA"/>
+    </changeSet>
+    
+    
 </databaseChangeLog>
