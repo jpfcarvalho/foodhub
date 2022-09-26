@@ -14,7 +14,12 @@ public abstract class CrudService<T extends BaseEntity> extends LoadService<T> {
 	}
 
 	public void deleteById(Long id) {
+		beforeDelete(getRepository().getById(id));
 		getRepository().deleteById(id);
+	}
+
+	protected void beforeDelete(T entity) {
+
 	}
 
 	protected void beforeUpdate(T entity) {

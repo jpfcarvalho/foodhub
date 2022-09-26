@@ -19,7 +19,7 @@ public class StorageConfig {
 	private static String REGION = "sa-east-1";
 
 	@Bean
-	private AmazonS3 generateS3Client() {
+	public AmazonS3 s3Client() {
 		AWSCredentials credentials = new BasicAWSCredentials(ACCESSKEY, ACCESSSECRET);
 		return AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials))
 				.withRegion(REGION).build();

@@ -26,9 +26,11 @@ import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import br.edu.unicesumar.foodhub.converter.ListStringToStringConverter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,6 +50,7 @@ public class Midia implements BaseEntity {
 	@Column(name = "descricao")
 	private String descricao;
 
+	@Builder.Default
 	@Column(name = "ativo")
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean ativo = Boolean.TRUE;
@@ -57,6 +60,7 @@ public class Midia implements BaseEntity {
 	private List<String> tags;
 
 	@NotNull
+	@Builder.Default
 	@Column(name = "data_publicacao", nullable = false)
 	private LocalDateTime dataPublicacao = LocalDateTime.now();
 
@@ -64,6 +68,7 @@ public class Midia implements BaseEntity {
 	@Column(name = "caminho", nullable = false)
 	private String caminho;
 
+	@Builder.Default
 	@Column(name = "foto_principal")
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean fotoPrincipal = Boolean.FALSE;
