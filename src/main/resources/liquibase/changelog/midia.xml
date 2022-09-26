@@ -22,28 +22,19 @@
             	<constraints nullable="false"/>
             </column>
             
-            <column name="DESCRICAO" type="VARCHAR(255)">
-            	<constraints nullable="false"/>
-            </column>
-            
+            <column name="DESCRICAO" type="VARCHAR(255)"/>
             <column name="ATIVO" type="CHAR(1)"/>
-            
             <column name="TAGS" type="VARCHAR(255)"/>
-            
             <column name="DATA_PUBLICACAO" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            
             <column name="CAMINHO" type="VARCHAR(255)">
             	<constraints nullable="false"/>
             </column>
-            
             <column name="FOTO_PRINCIPAL" type="CHAR(1)"/>
-            
             <column name="ID_PRODUTO" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
-            
         </createTable>
     </changeSet>
 

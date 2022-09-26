@@ -23,7 +23,6 @@
             </column>
             
             <column name="NOTA" type="NUMERIC(10,2)"/>
-    
             
             <column name="DATA_PUBLICACAO" type="TIMESTAMP">
                 <constraints nullable="false"/>
@@ -36,8 +35,6 @@
             <column name="ID_MIDIA" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>
             </column>
-            
-            
             
         </createTable>
     </changeSet>

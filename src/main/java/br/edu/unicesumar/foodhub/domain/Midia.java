@@ -10,10 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
@@ -49,7 +56,7 @@ public class Midia implements BaseEntity {
 	@Convert(converter = ListStringToStringConverter.class)
 	private List<String> tags;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "data_publicacao", nullable = false)
 	private LocalDateTime dataPublicacao = LocalDateTime.now();
 
@@ -59,10 +66,23 @@ public class Midia implements BaseEntity {
 
 	@Column(name = "foto_principal")
 	@Convert(converter = BooleanToStringConverter.class)
-	private Boolean fotoPrincipal = Boolean.TRUE;
+	private Boolean fotoPrincipal = Boolean.FALSE;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_produto", nullable = false)
+	@JsonBackReference
+	@JsonIgnoreProperties({ "midias" })
+	@JoinColumn(name = "id_produto", nullable = false, insertable = false, updatable = false)
 	private Produto produto;
+
+	@ManyToMany(mappedBy = "curtidas")
+	@JsonBackReference
+	@JsonIgnoreProperties({ "curtidas" })
+	private List<Pessoa> curtidas;
+
+	@OneToMany(orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "midia" })
+	@JoinColumn(name = "id_midia", nullable = false)
+	private List<Comentario> comentarios;
 
 }

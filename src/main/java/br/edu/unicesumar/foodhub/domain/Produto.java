@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
@@ -64,4 +65,10 @@ public class Produto implements BaseEntity {
 	@JsonIgnoreProperties({ "produtos" })
 	@JoinColumn(name = "id_grupo", nullable = false)
 	private Grupo grupo;
+
+	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "produto" })
+	@JoinColumn(name = "id_produto", nullable = false)
+	private List<Midia> midias;
 }
