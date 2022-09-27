@@ -29,7 +29,7 @@ public class StorageService {
 	public String uploadFile(MultipartFile file, String restaurante) {
 
 		StringBuilder fileName = new StringBuilder();
-		fileName.append("/" + restaurante + "/");
+		fileName.append(restaurante + "/");
 		fileName.append(System.currentTimeMillis() + "_");
 		fileName.append(file.getOriginalFilename());
 

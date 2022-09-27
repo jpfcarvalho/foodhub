@@ -90,7 +90,14 @@ public class Pessoa implements BaseEntity {
 	@OneToMany(orphanRemoval = true)
 	@JsonManagedReference
 	@JsonIgnoreProperties({ "pessoa" })
-	@JoinColumn(name = "id_comentario", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	private List<Comentario> comentarios;
+
+	@ManyToMany
+	@JsonManagedReference
+	@JsonIgnoreProperties({ "curtidas" })
+	@JoinTable(name = "pessoa_midia", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_midia") })
+	private List<Midia> curtidas;
 
 }
