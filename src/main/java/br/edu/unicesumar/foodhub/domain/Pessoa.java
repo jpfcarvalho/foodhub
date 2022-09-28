@@ -67,7 +67,7 @@ public class Pessoa implements BaseEntity {
 	@NotNull
 	@Size(min = 1)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("pessoa_endereco")
 	@JsonIgnoreProperties({ "pessoa" })
 	@JoinColumn(name = "id_pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -81,20 +81,18 @@ public class Pessoa implements BaseEntity {
 	private Users users;
 
 	@ManyToMany
-	@JsonManagedReference
 	@JsonIgnoreProperties({ "favoritados" })
 	@JoinTable(name = "pessoa_restaurante", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_restaurante") })
 	private List<Restaurante> favoritos;
 
 	@OneToMany(orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("pessoa_comentario")
 	@JsonIgnoreProperties({ "pessoa" })
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private List<Comentario> comentarios;
 
 	@ManyToMany
-	@JsonManagedReference
 	@JsonIgnoreProperties({ "curtidas" })
 	@JoinTable(name = "pessoa_midia", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_midia") })

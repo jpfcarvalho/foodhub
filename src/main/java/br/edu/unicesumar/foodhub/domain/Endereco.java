@@ -74,7 +74,7 @@ public class Endereco implements BaseEntity {
 	private String apelido;
 
 	@ManyToOne
-	@JsonBackReference
+	@JsonBackReference("pessoa_endereco")
 	@JsonIgnoreProperties({ "enderecos" })
 	@JoinColumn(name = "id_pessoa", insertable = false, updatable = false)
 	private Pessoa pessoa;

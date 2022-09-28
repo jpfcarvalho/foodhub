@@ -18,7 +18,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -73,7 +72,7 @@ public class Restaurante implements BaseEntity {
 	private Users users;
 
 	@OneToMany(orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "restaurante" })
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private List<Grupo> grupos;
@@ -83,13 +82,12 @@ public class Restaurante implements BaseEntity {
 	private Funcionamento funcionamento;
 
 	@OneToMany(orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("restaurante_pedido")
 	@JsonIgnoreProperties({ "restaurante" })
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private List<Pedido> pedidos;
 
 	@ManyToMany(mappedBy = "favoritos")
-	@JsonBackReference
 	@JsonIgnoreProperties({ "favoritos" })
 	private List<Pessoa> favoritados;
 

@@ -74,18 +74,17 @@ public class Midia implements BaseEntity {
 	private Boolean fotoPrincipal = Boolean.FALSE;
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("produto_midia")
 	@JsonIgnoreProperties({ "midias" })
 	@JoinColumn(name = "id_produto", nullable = false, insertable = false, updatable = false)
 	private Produto produto;
 
 	@ManyToMany(mappedBy = "curtidas")
-	@JsonBackReference
 	@JsonIgnoreProperties({ "curtidas" })
 	private List<Pessoa> curtidas;
 
 	@OneToMany(orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("midia_comentario")
 	@JsonIgnoreProperties({ "midia" })
 	@JoinColumn(name = "id_midia", nullable = false)
 	private List<Comentario> comentarios;

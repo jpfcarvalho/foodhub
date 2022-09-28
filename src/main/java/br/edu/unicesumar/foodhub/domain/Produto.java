@@ -61,13 +61,13 @@ public class Produto implements BaseEntity {
 	private List<GrupoComplemento> gruposComplementos = new ArrayList<>();
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("grupo_produto")
 	@JsonIgnoreProperties({ "produtos" })
 	@JoinColumn(name = "id_grupo", nullable = false)
 	private Grupo grupo;
 
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("produto_midia")
 	@JsonIgnoreProperties({ "produto" })
 	@JoinColumn(name = "id_produto", nullable = false)
 	private List<Midia> midias;
