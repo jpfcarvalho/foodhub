@@ -40,13 +40,13 @@ public class Grupo implements BaseEntity {
 	private String nome;
 
 	@OneToMany(orphanRemoval = true)
-	@JsonManagedReference
+	@JsonManagedReference("grupo_produto")
 	@JsonIgnoreProperties({ "grupo" })
 	@JoinColumn(name = "id_grupo", nullable = false, insertable = false, updatable = false)
 	private List<Produto> produtos;
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "grupos" })
 	@JoinColumn(name = "id_restaurante", nullable = false)
 	private Restaurante restaurante;

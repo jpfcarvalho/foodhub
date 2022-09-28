@@ -61,7 +61,7 @@ public class Pedido implements BaseEntity {
 	private Pessoa pessoa;
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("restaurante_pedido")
 	@JsonIgnoreProperties({ "pedidos" })
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private Restaurante restaurante;

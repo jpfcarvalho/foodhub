@@ -47,13 +47,13 @@ public class Comentario implements BaseEntity {
 	private LocalDateTime dataPublicacao = LocalDateTime.now();
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("pessoa_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
 	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
 	private Pessoa pessoa;
 
 	@ManyToOne(optional = false)
-	@JsonBackReference
+	@JsonBackReference("midia_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
 	@JoinColumn(name = "id_midia", nullable = false, insertable = false, updatable = false)
 	private Midia midia;
