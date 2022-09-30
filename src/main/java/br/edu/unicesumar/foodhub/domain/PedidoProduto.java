@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -27,6 +31,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "pedido_produto")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class PedidoProduto implements BaseEntity {
 
 	@Id
@@ -38,7 +44,7 @@ public class PedidoProduto implements BaseEntity {
 	@Column(name = "preco_produto", nullable = false)
 	private BigDecimal precoProduto;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 

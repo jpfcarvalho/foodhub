@@ -3,6 +3,7 @@ package br.edu.unicesumar.foodhub.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -22,6 +26,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "cidade")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Cidade implements BaseEntity {
 
 	@Id
@@ -33,7 +39,7 @@ public class Cidade implements BaseEntity {
 	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_estado", nullable = false)
 	private Estado estado;
 

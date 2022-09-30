@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
@@ -24,6 +27,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "produto_complemento")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class ProdutoComplemento implements BaseEntity {
 
 	@Id

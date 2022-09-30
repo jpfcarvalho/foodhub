@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
@@ -28,6 +30,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "comentario")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Comentario implements BaseEntity {
 
 	@Id
@@ -46,13 +50,13 @@ public class Comentario implements BaseEntity {
 	@Column(name = "data_publicacao", nullable = false)
 	private LocalDateTime dataPublicacao = LocalDateTime.now();
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
 	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
 	private Pessoa pessoa;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("midia_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
 	@JoinColumn(name = "id_midia", nullable = false, insertable = false, updatable = false)
