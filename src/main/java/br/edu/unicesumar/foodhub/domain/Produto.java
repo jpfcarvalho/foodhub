@@ -70,9 +70,8 @@ public class Produto implements BaseEntity {
 	@JoinColumn(name = "id_grupo", nullable = false)
 	private Grupo grupo;
 
-	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	@JsonManagedReference("produto_midia")
 	@JsonIgnoreProperties({ "produto" })
-	@JoinColumn(name = "id_produto", nullable = false)
-	private List<Midia> midias;
+	private List<Midia> midias = new ArrayList<>();
 }

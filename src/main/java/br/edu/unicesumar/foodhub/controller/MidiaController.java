@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.unicesumar.foodhub.base.CrudController;
+import br.edu.unicesumar.foodhub.base.LoadController;
 import br.edu.unicesumar.foodhub.domain.Midia;
 import br.edu.unicesumar.foodhub.dto.MidiaDTO;
 import br.edu.unicesumar.foodhub.service.MidiaService;
 
 @RestController
 @RequestMapping("/api/midias")
-public class MidiaController extends CrudController<Midia> {
+public class MidiaController extends LoadController<Midia> {
 
 	@Autowired
 	private MidiaService midiaService;
 
-	@PostMapping("/arquivo")
+	@PostMapping
 	public ResponseEntity<Midia> saveArquivo(@ModelAttribute MidiaDTO entityDTO) throws URISyntaxException {
 
 		Midia newMidia = midiaService.saveMidia(entityDTO);
@@ -33,7 +33,7 @@ public class MidiaController extends CrudController<Midia> {
 
 	}
 
-	@GetMapping("/download/{caminho}")
+	@GetMapping("/{caminho}")
 	public ResponseEntity<ByteArrayResource> downloadMidia(@PathVariable(name = "caminho") String caminho) {
 
 		ByteArrayResource arquivo = new ByteArrayResource(midiaService.downloadMidia(caminho));

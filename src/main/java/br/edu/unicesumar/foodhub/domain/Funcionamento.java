@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,6 +41,6 @@ public class Funcionamento implements BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
-	List<DiaFuncionamento> diasFuncionamentos;
+	List<DiaFuncionamento> diasFuncionamentos = new ArrayList<>();
 
 }

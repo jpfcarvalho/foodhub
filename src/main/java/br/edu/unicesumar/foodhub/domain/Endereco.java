@@ -80,7 +80,7 @@ public class Endereco implements BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_endereco")
 	@JsonIgnoreProperties({ "enderecos" })
-	@JoinColumn(name = "id_pessoa", insertable = false, updatable = false)
+	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 
 }

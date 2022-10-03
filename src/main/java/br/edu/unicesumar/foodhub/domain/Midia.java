@@ -1,6 +1,7 @@
 package br.edu.unicesumar.foodhub.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -59,9 +60,10 @@ public class Midia implements BaseEntity {
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean ativo = Boolean.TRUE;
 
+	@Builder.Default
 	@Column(name = "tags")
 	@Convert(converter = ListStringToStringConverter.class)
-	private List<String> tags;
+	private List<String> tags = new ArrayList<>();
 
 	@NotNull
 	@Builder.Default
@@ -80,17 +82,18 @@ public class Midia implements BaseEntity {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("produto_midia")
 	@JsonIgnoreProperties({ "midias" })
-	@JoinColumn(name = "id_produto", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 
+	@Builder.Default
 	@ManyToMany(mappedBy = "curtidas")
 	@JsonIgnoreProperties({ "curtidas" })
-	private List<Pessoa> curtidas;
+	private List<Pessoa> curtidas = new ArrayList<>();
 
-	@OneToMany(orphanRemoval = true)
+	@Builder.Default
+	@OneToMany(mappedBy = "midia", orphanRemoval = true)
 	@JsonManagedReference("midia_comentario")
 	@JsonIgnoreProperties({ "midia" })
-	@JoinColumn(name = "id_midia", nullable = false)
-	private List<Comentario> comentarios;
+	private List<Comentario> comentarios = new ArrayList<>();
 
 }

@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -43,11 +44,10 @@ public class Grupo implements BaseEntity {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(mappedBy = "grupo", orphanRemoval = true)
 	@JsonManagedReference("grupo_produto")
 	@JsonIgnoreProperties({ "grupo" })
-	@JoinColumn(name = "id_grupo", nullable = false, insertable = false, updatable = false)
-	private List<Produto> produtos;
+	private List<Produto> produtos = new ArrayList<>();
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("restaurante_grupo")
