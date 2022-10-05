@@ -1,6 +1,7 @@
 package br.edu.unicesumar.foodhub.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
@@ -24,7 +25,7 @@ public class MidiaDTO {
 
 	private Boolean ativo = Boolean.TRUE;
 
-	private List<String> tags;
+	private List<String> tags = new ArrayList<>();
 
 	private LocalDateTime dataPublicacao = LocalDateTime.now();
 

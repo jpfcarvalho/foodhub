@@ -12,7 +12,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -41,6 +43,8 @@ public class Pagamento implements BaseEntity {
 	private String status;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
+	@JsonBackReference("pessoa_pagamento")
+	@JsonIgnoreProperties({ "pagamentos" })
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	private Pessoa pessoa;
 }

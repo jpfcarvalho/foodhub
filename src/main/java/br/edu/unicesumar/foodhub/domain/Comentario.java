@@ -53,13 +53,13 @@ public class Comentario implements BaseEntity {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
-	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_pessoa", nullable = false, updatable = false)
 	private Pessoa pessoa;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("midia_comentario")
 	@JsonIgnoreProperties({ "comentarios" })
-	@JoinColumn(name = "id_midia", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_midia", nullable = false, updatable = false)
 	private Midia midia;
 
 }

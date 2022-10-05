@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -75,24 +76,22 @@ public class Restaurante implements BaseEntity {
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(mappedBy = "restaurante", orphanRemoval = true)
 	@JsonManagedReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "restaurante" })
-	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
-	private List<Grupo> grupos;
+	private List<Grupo> grupos = new ArrayList<>();
 
 	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
 	private Funcionamento funcionamento;
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(mappedBy = "restaurante", orphanRemoval = true)
 	@JsonManagedReference("restaurante_pedido")
 	@JsonIgnoreProperties({ "restaurante" })
-	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
-	private List<Pedido> pedidos;
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "favoritos")
 	@JsonIgnoreProperties({ "favoritos" })
-	private List<Pessoa> favoritados;
+	private List<Pessoa> favoritados = new ArrayList<>();
 
 }

@@ -45,6 +45,6 @@ public class PedidoComplementoProduto implements BaseEntity {
 	private Long quantidade;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_produto_complemento", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_produto_complemento", nullable = false)
 	private ProdutoComplemento produtoComplemento;
 }

@@ -53,7 +53,7 @@ public class Pedido implements BaseEntity {
 	private LocalDateTime dataHora;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_status_pedido", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_status_pedido", nullable = false)
 	private StatusPedido statusPedido;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -61,13 +61,13 @@ public class Pedido implements BaseEntity {
 	private Pagamento pagamento;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	private Pessoa pessoa;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("restaurante_pedido")
 	@JsonIgnoreProperties({ "pedidos" })
-	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_restaurante", nullable = false)
 	private Restaurante restaurante;
 
 	@Size(min = 1)

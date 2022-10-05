@@ -70,14 +70,14 @@ public class Pessoa implements BaseEntity {
 
 	@NotNull
 	@Size(min = 1)
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference("pessoa_endereco")
 	@JsonIgnoreProperties({ "pessoa" })
-	@JoinColumn(name = "id_pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	@JsonManagedReference("pessoa_pagamento")
+	@JsonIgnoreProperties({ "pessoa" })
 	private List<Pagamento> pagamentos = new ArrayList<>();
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -88,18 +88,17 @@ public class Pessoa implements BaseEntity {
 	@JsonIgnoreProperties({ "favoritados" })
 	@JoinTable(name = "pessoa_restaurante", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_restaurante") })
-	private List<Restaurante> favoritos;
+	private List<Restaurante> favoritos = new ArrayList<>();
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(mappedBy = "pessoa", orphanRemoval = true)
 	@JsonManagedReference("pessoa_comentario")
 	@JsonIgnoreProperties({ "pessoa" })
-	@JoinColumn(name = "id_pessoa", nullable = false)
-	private List<Comentario> comentarios;
+	private List<Comentario> comentarios = new ArrayList<>();
 
 	@ManyToMany
 	@JsonIgnoreProperties({ "curtidas" })
 	@JoinTable(name = "pessoa_midia", joinColumns = { @JoinColumn(name = "id_pessoa") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_midia") })
-	private List<Midia> curtidas;
+	private List<Midia> curtidas = new ArrayList<>();
 
 }
