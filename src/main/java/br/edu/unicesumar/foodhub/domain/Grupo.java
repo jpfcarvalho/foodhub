@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -28,6 +30,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "grupo")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Grupo implements BaseEntity {
 
 	@Id
@@ -45,7 +49,7 @@ public class Grupo implements BaseEntity {
 	@JoinColumn(name = "id_grupo", nullable = false, insertable = false, updatable = false)
 	private List<Produto> produtos;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "grupos" })
 	@JoinColumn(name = "id_restaurante", nullable = false)

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
@@ -30,6 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "endereco")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Endereco implements BaseEntity {
 
 	private static final String MENSAGEM_CEP = "Tamanho do CEP invalido.";
@@ -59,7 +63,7 @@ public class Endereco implements BaseEntity {
 	@Column(name = "bairro", nullable = false)
 	private String bairro;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cidade", nullable = false)
 	private Cidade cidade;
 
@@ -73,7 +77,7 @@ public class Endereco implements BaseEntity {
 	@Column(name = "apelido")
 	private String apelido;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_endereco")
 	@JsonIgnoreProperties({ "enderecos" })
 	@JoinColumn(name = "id_pessoa", insertable = false, updatable = false)

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -35,6 +37,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "restaurante")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Restaurante implements BaseEntity {
 
 	@Id
@@ -59,15 +63,15 @@ public class Restaurante implements BaseEntity {
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco", nullable = false)
 	private Endereco endereco;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria", nullable = false)
 	private Categoria categoria;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;
 
@@ -77,7 +81,7 @@ public class Restaurante implements BaseEntity {
 	@JoinColumn(name = "id_restaurante", nullable = false, insertable = false, updatable = false)
 	private List<Grupo> grupos;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
 	private Funcionamento funcionamento;
 

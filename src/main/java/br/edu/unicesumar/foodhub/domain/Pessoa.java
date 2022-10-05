@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,6 +42,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "pessoa")
+@JsonFilter("filterFields")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Pessoa implements BaseEntity {
 
 	@Id
@@ -76,7 +80,7 @@ public class Pessoa implements BaseEntity {
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private List<Pagamento> pagamentos = new ArrayList<>();
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_users", unique = true, updatable = false)
 	private Users users;
 
