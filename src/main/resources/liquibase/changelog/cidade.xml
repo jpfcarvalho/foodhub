@@ -18,8 +18,7 @@
                              primaryKeyName="PK_CIDADE"/>
             </column>
             <column name="NOME" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"
-                			 uniqueConstraintName="UK_NOME_CIDADE"/>
+                <constraints nullable="false"/>
             </column>
             <column name="ID_ESTADO" type="NUMERIC(10,0)">
                 <constraints nullable="false"/>

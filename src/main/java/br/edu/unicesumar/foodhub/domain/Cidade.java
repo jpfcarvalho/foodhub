@@ -36,7 +36,7 @@ public class Cidade implements BaseEntity {
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "nome", nullable = false, unique = true)
+	@Column(name = "nome", nullable = false)
 	private String nome;
 
 	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
