@@ -3,8 +3,6 @@ package br.edu.unicesumar.foodhub.base;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +19,7 @@ public abstract class CrudController<T extends BaseEntity> extends LoadControlle
 	}
 
 	@PostMapping
-	public ResponseEntity<T> save(@Valid @RequestBody T entity) throws URISyntaxException {
+	public ResponseEntity<T> save(@RequestBody T entity) throws URISyntaxException {
 		T newEntity = getCrudService().save(entity);
 		return ResponseEntity.created(new URI("/" + newEntity.getId())).body(newEntity);
 	}

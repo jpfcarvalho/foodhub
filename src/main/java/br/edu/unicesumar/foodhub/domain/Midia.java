@@ -79,6 +79,7 @@ public class Midia implements BaseEntity {
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean fotoPrincipal = Boolean.FALSE;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("produto_midia")
 	@JsonIgnoreProperties({ "midias" })

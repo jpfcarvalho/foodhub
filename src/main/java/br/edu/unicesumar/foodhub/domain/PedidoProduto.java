@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -44,6 +45,7 @@ public class PedidoProduto implements BaseEntity {
 	@Column(name = "preco_produto", nullable = false)
 	private BigDecimal precoProduto;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
@@ -51,4 +53,9 @@ public class PedidoProduto implements BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_pedido_produto", nullable = false)
 	private List<PedidoComplementoProduto> complementos = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_midia")
+	private Midia midia;
+
 }

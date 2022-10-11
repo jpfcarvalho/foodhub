@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -81,6 +82,7 @@ public class Restaurante implements BaseEntity {
 	@JsonIgnoreProperties({ "restaurante" })
 	private List<Grupo> grupos = new ArrayList<>();
 
+	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
 	private Funcionamento funcionamento;

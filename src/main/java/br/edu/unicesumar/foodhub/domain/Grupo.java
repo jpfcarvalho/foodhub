@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -49,6 +50,7 @@ public class Grupo implements BaseEntity {
 	@JsonIgnoreProperties({ "grupo" })
 	private List<Produto> produtos = new ArrayList<>();
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "grupos" })

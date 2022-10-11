@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -42,6 +43,7 @@ public class Pagamento implements BaseEntity {
 	@Column(name = "status", nullable = false)
 	private String status;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_pagamento")
 	@JsonIgnoreProperties({ "pagamentos" })

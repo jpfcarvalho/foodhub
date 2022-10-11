@@ -52,14 +52,17 @@ public class Pedido implements BaseEntity {
 	@Column(name = "data_hora", nullable = false)
 	private LocalDateTime dataHora;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_status_pedido", nullable = false)
 	private StatusPedido statusPedido;
 
+	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_pagamento")
 	private Pagamento pagamento;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private Pessoa pessoa;
@@ -70,8 +73,8 @@ public class Pedido implements BaseEntity {
 	@JoinColumn(name = "id_restaurante", nullable = false)
 	private Restaurante restaurante;
 
-	@Size(min = 1)
 	@NotNull
+	@Size(min = 1)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_pedido", nullable = false)
 	private List<PedidoProduto> produtos = new ArrayList<>();
