@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -44,6 +45,7 @@ public class PedidoComplementoProduto implements BaseEntity {
 	@Column(name = "quantidade", nullable = false)
 	private Long quantidade;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto_complemento", nullable = false)
 	private ProdutoComplemento produtoComplemento;

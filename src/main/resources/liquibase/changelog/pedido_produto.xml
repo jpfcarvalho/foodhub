@@ -68,12 +68,12 @@
                        onFailMessage="A constraint FK_PEDIDO_PRODUTO_MIDIA já existe">
             <not>
                 <foreignKeyConstraintExists
-                        foreignKeyName="FK_PEDIDO_PRODUTO_PRODUTO"
+                        foreignKeyName="FK_PEDIDO_PRODUTO_MIDIA"
                         foreignKeyTableName="PEDIDO_PRODUTO"/>
             </not>
         </preConditions>
         <addForeignKeyConstraint
-                baseColumnNames="ID_PRODUTO"
+                baseColumnNames="ID_MIDIA"
                 baseTableName="PEDIDO_PRODUTO"
                 constraintName="FK_PEDIDO_PRODUTO_MIDIA"
                 referencedColumnNames="ID" referencedTableName="MIDIA"/>
