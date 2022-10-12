@@ -31,5 +31,8 @@
 		
 		<!-- INSERTS PADRÃO-->
 		<include file="insert/insert_status_pedido.xml" relativeToChangelogFile="true"/>
+		<include file="insert/insert_categoria.xml" relativeToChangelogFile="true"/>
+		<include file="insert/insert_estado.xml" relativeToChangelogFile="true"/>
+		<include file="insert/insert_cidade.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
