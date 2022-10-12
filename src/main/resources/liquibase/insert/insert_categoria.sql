@@ -13,7 +13,7 @@ insert into categoria values (12, 'Vegano');
 insert into categoria values (13, 'Chinesa');
 insert into categoria values (14, 'Árabe');
 insert into categoria values (15, 'Salgados');
-insert into categoria values (16, 'Fastfood');?
+insert into categoria values (16, 'Fastfood');
 insert into categoria values (17, 'Pastel');
 insert into categoria values (18, 'Mexicana');
 insert into categoria values (19, 'Fitness');
