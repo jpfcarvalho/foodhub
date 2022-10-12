@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.unicesumar.foodhub.Fixtures;
 import br.edu.unicesumar.foodhub.domain.Restaurante;
-import br.edu.unicesumar.foodhub.domain.Users;
+import br.edu.unicesumar.foodhub.service.UsersService;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -31,17 +31,42 @@ public class RestauranteRepositoryTest {
 	private RestauranteRepository repository;
 
 	@Autowired
+	private UsersService usersService;
+
+	@Autowired
 	private EntityManager em;
 
 	@Test
 	public void insertRestaurante() {
 
-		Restaurante result = repository.save(Fixtures.createRestaurante());
+		Restaurante result = repository.save(Fixtures.createRestaurante(1L));
 
 		assertThat(result, notNullValue());
 		assertThat(result.getId(), notNullValue());
 		assertThat(result.getNomeFantasia(), equalTo("Restaurante Teste"));
-		assertThat(result.getCpfCnpj(), equalTo("9999999999"));
+		assertThat(result.getCpfCnpj(), equalTo("99999999999"));
+		assertThat(result.getTelefone(), equalTo("44999999999"));
+		assertThat(result.getEndereco(), notNullValue());
+		assertThat(result.getCategoria(), notNullValue());
+		assertThat(result.getUsers(), notNullValue());
+		assertThat(result.getFuncionamento(), notNullValue());
+	}
+
+	@Test
+	public void UpdateRestaurante() {
+
+		Restaurante restaurante = Fixtures.createRestaurante(1L);
+		restaurante.setUsers(usersService.signUp(Fixtures.createUsers(1L)));
+
+		Restaurante saved = repository.save(restaurante);
+		saved.setNomeFantasia("Restaurante Atualizado");
+
+		Restaurante result = repository.save(saved);
+
+		assertThat(result, notNullValue());
+		assertThat(result.getId(), equalTo(saved.getId()));
+		assertThat(result.getNomeFantasia(), equalTo("Restaurante Atualizado"));
+		assertThat(result.getCpfCnpj(), equalTo("99999999999"));
 		assertThat(result.getTelefone(), equalTo("44999999999"));
 		assertThat(result.getEndereco(), notNullValue());
 		assertThat(result.getCategoria(), notNullValue());
@@ -52,14 +77,14 @@ public class RestauranteRepositoryTest {
 	@Test
 	public void deleteRestaurante() {
 
-		Restaurante saved = repository.save(Fixtures.createRestaurante());
+		Restaurante saved = repository.save(Fixtures.createRestaurante(1L));
 
 		Restaurante beforeDelete = em.find(Restaurante.class, saved.getId());
 
 		assertThat(beforeDelete, notNullValue());
 
 		repository.deleteById(saved.getId());
-		Users afterDelete = em.find(Users.class, saved.getId());
+		Restaurante afterDelete = em.find(Restaurante.class, saved.getId());
 
 		assertThat(afterDelete, nullValue());
 
@@ -68,13 +93,13 @@ public class RestauranteRepositoryTest {
 	@Test
 	public void findByIdRestaurante() {
 
-		Restaurante saved = repository.save(Fixtures.createRestaurante());
+		Restaurante saved = repository.save(Fixtures.createRestaurante(1L));
 
 		Restaurante result = repository.findById(saved.getId()).get();
 
 		assertThat(result, notNullValue());
 		assertThat(result.getNomeFantasia(), equalTo("Restaurante Teste"));
-		assertThat(result.getCpfCnpj(), equalTo("9999999999"));
+		assertThat(result.getCpfCnpj(), equalTo("99999999999"));
 		assertThat(result.getTelefone(), equalTo("44999999999"));
 		assertThat(result.getEndereco(), notNullValue());
 		assertThat(result.getCategoria(), notNullValue());
@@ -87,7 +112,11 @@ public class RestauranteRepositoryTest {
 	public void findAllRestaurante() {
 
 		Restaurante restaurante = Fixtures.createRestaurante(1L);
+		restaurante.setUsers(usersService.signUp(Fixtures.createUsers(1L)));
+
 		Restaurante restaurante2 = Fixtures.createRestaurante(2L);
+		restaurante2.setUsers(usersService.signUp(Fixtures.createUsers(2L)));
+
 		repository.saveAll(List.of(restaurante, restaurante2));
 
 		List<Restaurante> result = repository.findAll();

@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import br.edu.unicesumar.foodhub.config.auth.Roles;
@@ -8,6 +9,8 @@ import br.edu.unicesumar.foodhub.domain.Cidade;
 import br.edu.unicesumar.foodhub.domain.Endereco;
 import br.edu.unicesumar.foodhub.domain.Estado;
 import br.edu.unicesumar.foodhub.domain.Funcionamento;
+import br.edu.unicesumar.foodhub.domain.Grupo;
+import br.edu.unicesumar.foodhub.domain.Produto;
 import br.edu.unicesumar.foodhub.domain.Restaurante;
 import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.domain.embedded.Coordenadas;
@@ -53,8 +56,8 @@ public final class Fixtures {
 		Users users = new Users();
 		users.setId(id);
 		users.setRoles(Set.of(Roles.ROLE_CLIENTE));
-		users.setEmail("Email@teste.com");
-		users.setUsername("Username");
+		users.setEmail(id + "Email@teste.com");
+		users.setUsername(id + "Username");
 		users.setPassword("password");
 
 		return users;
@@ -83,7 +86,7 @@ public final class Fixtures {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(id);
 		restaurante.setNomeFantasia("Restaurante Teste");
-		restaurante.setCpfCnpj("9999999999");
+		restaurante.setCpfCnpj("99999999999");
 		restaurante.setTelefone("44999999999");
 		restaurante.setEndereco(createEndereco(id));
 		restaurante.setCategoria(createCategoria(id));
@@ -91,6 +94,27 @@ public final class Fixtures {
 		restaurante.setFuncionamento(createFuncionamento(id));
 
 		return restaurante;
+	}
+
+	public static Grupo createGrupo(Long id) {
+
+		Grupo grupo = new Grupo();
+		grupo.setId(id);
+		grupo.setNome("Grupo Teste");
+		grupo.setRestaurante(createRestaurante(id));
+
+		return grupo;
+	}
+
+	public static Produto createProduto(Long id) {
+
+		Produto produto = new Produto();
+		produto.setId(id);
+		produto.setNome("Produto Teste");
+		produto.setValor(BigDecimal.TEN);
+		produto.setGrupo(createGrupo(id));
+
+		return produto;
 	}
 
 }

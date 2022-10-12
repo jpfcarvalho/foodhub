@@ -7,7 +7,6 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 
@@ -18,7 +17,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.unicesumar.foodhub.config.auth.Roles;
+import br.edu.unicesumar.foodhub.Fixtures;
 import br.edu.unicesumar.foodhub.domain.Users;
 
 @SpringBootTest
@@ -36,14 +35,12 @@ public class UsersRepositoryTest {
 	@Test
 	public void insertUsers() {
 
-		Users user = new Users(null, Set.of(Roles.ROLE_CLIENTE), "Email@teste.com", "Username", "password");
-
-		Users result = repository.save(user);
+		Users result = repository.save(Fixtures.createUsers(1L));
 
 		assertThat(result, notNullValue());
 		assertThat(result.getId(), notNullValue());
-		assertThat(result.getEmail(), equalTo("Email@teste.com"));
-		assertThat(result.getUsername(), equalTo("Username"));
+		assertThat(result.getEmail(), equalTo("1Email@teste.com"));
+		assertThat(result.getUsername(), equalTo("1Username"));
 		assertThat(result.getPassword(), equalTo("password"));
 		assertThat(result.getRoles().size(), is(1));
 
@@ -52,8 +49,7 @@ public class UsersRepositoryTest {
 	@Test
 	public void deleteUsers() {
 
-		Users user = new Users(null, Set.of(Roles.ROLE_CLIENTE), "Email@teste.com", "Username", "password");
-		Users saved = repository.save(user);
+		Users saved = repository.save(Fixtures.createUsers(1L));
 
 		Users beforeDelete = em.find(Users.class, saved.getId());
 
@@ -69,14 +65,13 @@ public class UsersRepositoryTest {
 	@Test
 	public void findByIdUsers() {
 
-		Users user = new Users(null, Set.of(Roles.ROLE_CLIENTE), "Email@teste.com", "Username", "password");
-		Users saved = repository.save(user);
+		Users saved = repository.save(Fixtures.createUsers(1L));
 
 		Users result = repository.findById(saved.getId()).get();
 
 		assertThat(result, notNullValue());
-		assertThat(result.getEmail(), equalTo("Email@teste.com"));
-		assertThat(result.getUsername(), equalTo("Username"));
+		assertThat(result.getEmail(), equalTo("1Email@teste.com"));
+		assertThat(result.getUsername(), equalTo("1Username"));
 		assertThat(result.getPassword(), equalTo("password"));
 		assertThat(result.getRoles().size(), is(1));
 
@@ -85,8 +80,8 @@ public class UsersRepositoryTest {
 	@Test
 	public void findAllUsers() {
 
-		Users user = new Users(null, Set.of(Roles.ROLE_CLIENTE), "Email@teste.com", "Username", "password");
-		Users user2 = new Users(null, Set.of(Roles.ROLE_CLIENTE), "Email2@teste.com", "Username2", "password");
+		Users user = Fixtures.createUsers(1L);
+		Users user2 = Fixtures.createUsers(2L);
 		repository.saveAll(List.of(user, user2));
 
 		List<Users> result = repository.findAll();
