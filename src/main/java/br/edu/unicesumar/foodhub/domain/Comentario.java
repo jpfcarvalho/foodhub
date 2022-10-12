@@ -17,10 +17,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +30,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "comentario")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "texto", "nota", "dataPublicacao", "pessoa.id", "midia.id" })
 public class Comentario implements BaseEntity {
 
 	@Id

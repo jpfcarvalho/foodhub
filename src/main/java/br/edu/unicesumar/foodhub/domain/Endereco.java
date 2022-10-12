@@ -17,10 +17,10 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import br.edu.unicesumar.foodhub.domain.embedded.Coordenadas;
 import lombok.AllArgsConstructor;
@@ -32,8 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "endereco")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "numero", "complemento", "cep", "lougradouro", "bairro", "cidade.nome", "estado.nome",
+		"estado.uf", "coordenadas.latitute", "coordenadas.longitude", "principal", "apelido" })
 public class Endereco implements BaseEntity {
 
 	private static final String MENSAGEM_CEP = "Tamanho do CEP invalido.";

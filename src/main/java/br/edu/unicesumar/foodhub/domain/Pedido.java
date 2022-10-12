@@ -22,10 +22,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,8 +35,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "pedido")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "precoTotal", "dataHora", "statusPedido", "pagamento.id", "pessoa.id", "produtos.id",
+		"produtos.precoProduto", "produtos.produto.id", "produtos.complementos.id",
+		"produtos.complementos.valorComplemento", "produtos.complementos.quantidade",
+		"produtos.complementos.produtoComplemento.id" })
 public class Pedido implements BaseEntity {
 
 	@Id

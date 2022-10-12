@@ -23,12 +23,13 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import br.edu.unicesumar.foodhub.config.auth.Roles;
+import br.edu.unicesumar.foodhub.config.filter.SelectBeanPropertyFilter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,7 +45,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilter(SelectBeanPropertyFilter.FILTER_NAME)
 public class Users implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
