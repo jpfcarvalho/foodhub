@@ -14,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +24,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "funcionamento")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Funcionamento implements BaseEntity {
 
 	@Id

@@ -21,11 +21,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,8 +36,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "produto")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "nome", "descricao", "valor", "ativo", "gruposComplementos.id",
+		"gruposComplementos.nome", "gruposComplementos.obrigatorio", "gruposComplementos.quantidadeMinima",
+		"gruposComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.id",
+		"gruposComplementos.produtosComplementos.nome", "gruposComplementos.produtosComplementos.descricao",
+		"gruposComplementos.produtosComplementos.valor", "gruposComplementos.produtosComplementos.quantidadeMinima",
+		"gruposComplementos.produtosComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.ativo",
+		"midias.id" })
 public class Produto implements BaseEntity {
 
 	@Id

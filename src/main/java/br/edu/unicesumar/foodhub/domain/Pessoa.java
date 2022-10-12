@@ -24,11 +24,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,8 +42,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "pessoa")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "nome", "sobrenome", "cpf", "telefone", "enderecos.id", "enderecos.numero",
+		"enderecos.complemento", "enderecos.cep", "enderecos.lougradouro", "enderecos.bairro", "enderecos.cidade.nome",
+		"enderecos.estado.nome", "enderecos.estado.uf", "enderecos.coordenadas.latitute",
+		"enderecos.coordenadas.longitude", "enderecos.principal", "enderecos.apelido", "pagamentos.id", "users.id",
+		"users.email" })
 public class Pessoa implements BaseEntity {
 
 	@Id

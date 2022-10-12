@@ -18,11 +18,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +32,16 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "grupo")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "nome", "produtos.id", "produtos.nome", "produtos.descricao", "produto.valor",
+		"produto.ativo", "produto.gruposComplementos.id", "produto.gruposComplementos.id",
+		"produto.gruposComplementos.nome", "produto.gruposComplementos.obrigatorio",
+		"produto.gruposComplementos.quantidadeMinima", "produto.gruposComplementos.quantidadeMaxima",
+		"produto.gruposComplementos.produtosComplementos.id", "produto.gruposComplementos.produtosComplementos.nome",
+		"produto.gruposComplementos.produtosComplementos.descricao",
+		"produto.gruposComplementos.produtosComplementos.valor",
+		"produto.gruposComplementos.produtosComplementos.quantidadeMinima",
+		"produto.gruposComplementos.produtosComplementos.quantidadeMaxima",
+		"produto.gruposComplementos.produtosComplementos.ativo" })
 public class Grupo implements BaseEntity {
 
 	@Id
