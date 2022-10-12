@@ -21,11 +21,11 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,8 +39,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "restaurante")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "razaoSocial", "nomeFantasia", "cpfCnpj", "telefone", "endereco.id", "endereco.numero",
+		"endereco.complemento", "endereco.cep", "endereco.lougradouro", "endereco.bairro", "endereco.cidade.nome",
+		"endereco.estado.nome", "endereco.estado.uf", "endereco.coordenadas.latitute", "endereco.coordenadas.longitude",
+		"endereco.principal", "endereco.apelido", "categoria.id", "categoria.tipo", "users.id", "users.email",
+		"grupos.id", "funcionamento.id", "funcionamento.raioFuncionamentoKm", "funcionamento.diasFuncionamentos.id",
+		"funcionamento.diasFuncionamentos.diaSemana", "funcionamento.diasFuncionamentos.aberturasEncerramentos.id",
+		"funcionamento.diasFuncionamentos.aberturasEncerramentos.horaAbertura",
+		"funcionamento.diasFuncionamentos.aberturasEncerramentos.horaEncerramento", "pedidos.id" })
 public class Restaurante implements BaseEntity {
 
 	@Id
