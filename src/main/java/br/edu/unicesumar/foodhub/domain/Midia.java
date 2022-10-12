@@ -21,11 +21,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import br.edu.unicesumar.foodhub.converter.ListStringToStringConverter;
 import lombok.AllArgsConstructor;
@@ -39,8 +39,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "midia")
-@JsonFilter("filterFields")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilterFields(of = { "id", "titulo", "descricao", "ativo", "tags", "dataPublicacao", "caminho", "fotoPrincipal",
+		"produto.id" })
 public class Midia implements BaseEntity {
 
 	@Id
