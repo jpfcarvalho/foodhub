@@ -1,4 +1,4 @@
-INSERT INTO STATUS_PEDIDO (ID, STATUS) VALUES (1, 'Aberto');
-INSERT INTO STATUS_PEDIDO (ID, STATUS) VALUES (2, 'Preparando');
-INSERT INTO STATUS_PEDIDO (ID, STATUS) VALUES (3, 'Entrega');
-INSERT INTO STATUS_PEDIDO (ID, STATUS) VALUES (4, 'Finalizado');
+insert into status_pedido (id, status) values (1, 'Aberto');
+insert into status_pedido (id, status) values (2, 'Preparando');
+insert into status_pedido (id, status) values (3, 'Entrega');
+insert into status_pedido (id, status) values (4, 'Finalizado');
