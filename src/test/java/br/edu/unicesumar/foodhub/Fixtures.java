@@ -10,7 +10,10 @@ import br.edu.unicesumar.foodhub.domain.Endereco;
 import br.edu.unicesumar.foodhub.domain.Estado;
 import br.edu.unicesumar.foodhub.domain.Funcionamento;
 import br.edu.unicesumar.foodhub.domain.Grupo;
+import br.edu.unicesumar.foodhub.domain.GrupoComplemento;
+import br.edu.unicesumar.foodhub.domain.Pessoa;
 import br.edu.unicesumar.foodhub.domain.Produto;
+import br.edu.unicesumar.foodhub.domain.ProdutoComplemento;
 import br.edu.unicesumar.foodhub.domain.Restaurante;
 import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.domain.embedded.Coordenadas;
@@ -115,6 +118,45 @@ public final class Fixtures {
 		produto.setGrupo(createGrupo(id));
 
 		return produto;
+	}
+
+	public static ProdutoComplemento createProdutoComplemento(Long id) {
+
+		ProdutoComplemento produtoComplemento = new ProdutoComplemento();
+		produtoComplemento.setId(id);
+		produtoComplemento.setNome("Complemento Teste");
+		produtoComplemento.setValor(BigDecimal.ONE);
+		produtoComplemento.setQuantidadeMinima(1L);
+		produtoComplemento.setQuantidadeMaxima(10L);
+
+		return produtoComplemento;
+	}
+
+	public static GrupoComplemento createGrupoComplemento(Long id) {
+
+		GrupoComplemento grupoComplemento = new GrupoComplemento();
+		grupoComplemento.setId(id);
+		grupoComplemento.setNome("Grupo Complemento Teste");
+		grupoComplemento.setObrigatorio(Boolean.TRUE);
+		grupoComplemento.setQuantidadeMinima(1L);
+		grupoComplemento.setQuantidadeMaxima(3L);
+		grupoComplemento.getProdutosComplementos().add(createProdutoComplemento(id));
+
+		return grupoComplemento;
+	}
+
+	public static Pessoa createPessoa(Long id) {
+
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(id);
+		pessoa.setNome("Pessoa Teste");
+		pessoa.setSobrenome("Sobrenome Teste");
+		pessoa.setCpf("87251052059");
+		pessoa.setTelefone("44999999999");
+		pessoa.getEnderecos().add(createEndereco(id));
+		pessoa.setUsers(createUsers(id));
+
+		return pessoa;
 	}
 
 }
