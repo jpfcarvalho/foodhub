@@ -22,9 +22,9 @@ public class CorsConfig {
 		config.setAllowCredentials(true);
 		// config.setAllowedOrigins(Arrays.asList("http://172.17.64.1:3000",
 		// "http://172.17.64.1:5241"));
-		config.setAllowedOrigins(Collections.singletonList("*"));
+		config.setAllowedOrigins(Collections.singletonList(""));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT"));
-		config.setAllowedHeaders(Collections.singletonList("*"));
+		config.setAllowedHeaders(Collections.singletonList(""));
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
