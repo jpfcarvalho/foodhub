@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +35,10 @@ public class Funcionamento implements BaseEntity {
 
 	@Column(name = "raio_funcionamento_km", nullable = false)
 	private Long raioFuncionamentoKm;
+
+	@Column(name = "aberto", nullable = false)
+	@Convert(converter = BooleanToStringConverter.class)
+	private Boolean aberto = Boolean.FALSE;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_funcionamento", nullable = false)
