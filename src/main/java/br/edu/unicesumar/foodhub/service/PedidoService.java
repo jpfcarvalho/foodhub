@@ -1,5 +1,7 @@
 package br.edu.unicesumar.foodhub.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -19,7 +21,8 @@ public class PedidoService extends CrudService<Pedido> {
 
 	public void atualizarStatusPedido(Long idPedido) {
 
-		getRepository().findById(idPedido).ifPresentOrElse(pedido -> {
+		Optional<Pedido> pedidoOpt = getRepository().findById(idPedido);
+		pedidoOpt.ifPresentOrElse(pedido -> {
 			if (pedido.getStatusPedido().getId().equals(StatusPedido.FINALIZADO.getValue())) {
 				throw new IllegalArgumentException("Pedido já foi finalizado");
 			}
