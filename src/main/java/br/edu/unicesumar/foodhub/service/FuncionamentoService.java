@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.unicesumar.foodhub.base.LoadService;
 import br.edu.unicesumar.foodhub.domain.Funcionamento;
+import br.edu.unicesumar.foodhub.domain.Restaurante;
 import br.edu.unicesumar.foodhub.domain.Users;
 import br.edu.unicesumar.foodhub.repository.RestauranteRepository;
 
@@ -22,7 +23,9 @@ public class FuncionamentoService extends LoadService<Funcionamento> {
 		Users userLogado = Optional
 				.ofNullable((Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
 				.orElseThrow(() -> new AuthorizationServiceException("Usuario não encontrado"));
-		restauranteRepository.findRestauranteByUsersUsername(userLogado.getUsername()).ifPresentOrElse(restaurante -> {
+		Optional<Restaurante> restauranteOpt = restauranteRepository
+				.findRestauranteByUsersUsername(userLogado.getUsername());
+		restauranteOpt.ifPresentOrElse(restaurante -> {
 			restaurante.getFuncionamento().setAberto(!restaurante.getFuncionamento().getAberto());
 			restauranteRepository.save(restaurante);
 		}, () -> {
