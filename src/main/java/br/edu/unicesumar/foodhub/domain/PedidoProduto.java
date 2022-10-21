@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
@@ -36,7 +35,7 @@ public class PedidoProduto implements BaseEntity {
 	@SequenceGenerator(name = "S_PEDIDO_COMPLEMENTO_PRODUTO", sequenceName = "S_PEDIDO_COMPLEMENTO_PRODUTO", allocationSize = 1)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "preco_produto", nullable = false)
 	private BigDecimal precoProduto;
 

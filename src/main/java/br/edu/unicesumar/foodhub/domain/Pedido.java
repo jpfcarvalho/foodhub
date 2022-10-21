@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -35,8 +34,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "pedido")
-@JsonFilterFields(of = { "id", "precoTotal", "dataHora", "statusPedido", "pagamento.id", "pessoa.id", "produtos.id",
-		"produtos.precoProduto", "produtos.produto.id", "produtos.complementos.id",
+@JsonFilterFields(of = { "id", "precoTotal", "dataHora", "statusPedido.status", "pagamento.id", "pessoa.id",
+		"produtos.id", "produtos.precoProduto", "produtos.produto.id", "produtos.complementos.id",
 		"produtos.complementos.valorComplemento", "produtos.complementos.quantidade",
 		"produtos.complementos.produtoComplemento.id" })
 public class Pedido implements BaseEntity {
@@ -46,11 +45,11 @@ public class Pedido implements BaseEntity {
 	@SequenceGenerator(name = "S_PEDIDO", sequenceName = "S_PEDIDO", allocationSize = 1)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "preco_total", nullable = false)
 	private BigDecimal precoTotal;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "data_hora", nullable = false)
 	private LocalDateTime dataHora;
 
