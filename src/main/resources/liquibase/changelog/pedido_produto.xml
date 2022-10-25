@@ -84,7 +84,7 @@
     	<preConditions onFail="MARK_RAN"
                        onFailMessage="A coluna ID_PEDIDO já existe">
             <not>
-                <columnExists tableName="PEDIDO_PRODUTO" columnName="ABERTO"/>
+                <columnExists tableName="PEDIDO_PRODUTO" columnName="ID_PEDIDO"/>
             </not>
         </preConditions>
         <addColumn tableName="PEDIDO_PRODUTO">
