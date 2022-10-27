@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AuthorizationServiceException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.edu.unicesumar.foodhub.base.LoadService;
@@ -19,10 +18,11 @@ public class FuncionamentoService extends LoadService<Funcionamento> {
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 
+	@Autowired
+	private UsersService usersService;
+
 	public void abertura() {
-		Users userLogado = Optional
-				.ofNullable((Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-				.orElseThrow(() -> new AuthorizationServiceException("Usuario não encontrado"));
+		Users userLogado = usersService.findUsersLogado();
 		Optional<Restaurante> restauranteOpt = restauranteRepository
 				.findRestauranteByUsersUsername(userLogado.getUsername());
 		restauranteOpt.ifPresentOrElse(restaurante -> {

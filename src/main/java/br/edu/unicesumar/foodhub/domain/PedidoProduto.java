@@ -40,7 +40,7 @@ public class PedidoProduto implements BaseEntity {
 	private BigDecimal precoProduto;
 
 	@NotNull
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 
