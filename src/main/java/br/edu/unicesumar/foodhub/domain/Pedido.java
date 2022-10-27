@@ -51,12 +51,12 @@ public class Pedido implements BaseEntity {
 
 	@NotNull
 	@Column(name = "data_hora", nullable = false)
-	private LocalDateTime dataHora;
+	private LocalDateTime dataHora = LocalDateTime.now();
 
 	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_status_pedido", nullable = false)
-	private StatusPedido statusPedido;
+	private StatusPedido statusPedido = StatusPedido.of(1L);
 
 	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -83,5 +83,10 @@ public class Pedido implements BaseEntity {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_comentario")
 	private Comentario comentario;
+
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_endereco", nullable = false)
+	private Endereco endereco;
 
 }

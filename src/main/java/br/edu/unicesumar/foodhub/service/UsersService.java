@@ -1,8 +1,11 @@
 package br.edu.unicesumar.foodhub.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -68,6 +71,13 @@ public class UsersService implements UserDetailsService {
 		entity.setPassword(pass);
 
 		return usersRepository.save(entity);
+	}
+
+	public Users findUsersLogado() {
+
+		return Optional.ofNullable((Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+				.orElseThrow(() -> new AuthorizationServiceException("Usuario não encontrado"));
+
 	}
 
 }

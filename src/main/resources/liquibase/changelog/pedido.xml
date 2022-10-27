@@ -145,4 +145,36 @@
                 constraintName="FK_PEDIDO_COMENTARIO"
                 referencedColumnNames="ID" referencedTableName="COMENTARIO"/>
     </changeSet>
+    
+    <changeSet author="joao.carvalho" id="INSERT_ID_ENDERECO_PEDIDO">
+    	<validCheckSum>ANY</validCheckSum>
+    	<preConditions onFail="MARK_RAN"
+                       onFailMessage="A coluna ID_ENDERECO já existe">
+            <not>
+                <columnExists tableName="PEDIDO_PRODUTO" columnName="ID_ENDERECO"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="PEDIDO">
+        	<column name="ID_ENDERECO" type="NUMERIC(10,0)">
+        		<constraints nullable="false"/>
+        	</column>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet author="joao.carvalho" id="FK_ENDERECO_PRODUTO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_ENDERECO_PRODUTO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_ENDERECO_PRODUTO"
+                        foreignKeyTableName="PEDIDO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_ENDERECO"
+                baseTableName="PEDIDO"
+                constraintName="FK_ENDERECO_PRODUTO"
+                referencedColumnNames="ID" referencedTableName="ENDERECO"/>
+    </changeSet>
 </databaseChangeLog>
