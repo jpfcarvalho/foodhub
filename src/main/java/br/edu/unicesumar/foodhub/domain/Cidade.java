@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
+import br.edu.unicesumar.foodhub.config.filter.JsonFilterFields;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "cidade")
+@JsonFilterFields(of = { "id", "nome", "estado.id", "estado.nome", "estado.uf" })
 public class Cidade implements BaseEntity {
 
 	@Id
