@@ -61,26 +61,21 @@ public class PedidoService extends CrudService<Pedido> {
 	}
 
 	@Override
+	protected void beforeSave(Pedido entity) {
+		setPrecoTotal(entity);
+	}
+
+	@Override
 	protected void beforeInsert(Pedido entity) {
-		Users userLogado = usersService.findUsersLogado();
-		pessoaRepository.findPessoaByUsersUsername(userLogado.getUsername()).ifPresentOrElse(pessoa -> {
-			entity.setPessoa(pessoa);
-			entity.getPagamento().setPessoa(pessoa);
-		}, () -> {
-			throw new AuthorizationServiceException("O Usuario não tem Permissão de realizar pedidos.");
-		});
+		validUser(entity);
 
-		entity.getProdutos().forEach(produto -> {
-			produto.getComplementos().forEach(complemento -> {
-				complemento.setValorComplemento(
-						findObjeto(ProdutoComplemento.class, complemento.getProdutoComplemento().getId()).getValor());
-			});
-			produto.setPrecoProduto(findObjeto(Produto.class, produto.getProduto().getId()).getValor());
-		});
+		setValor(entity);
 
-		entity.setPrecoTotal(entity.getProdutos().stream().map(PedidoProduto::getPrecoProduto).reduce(BigDecimal::add)
-				.orElse(BigDecimal.ZERO));
+		setRestaurante(entity);
 
+	}
+
+	private void setRestaurante(Pedido entity) {
 		produtoRepository
 				.findRestaurante(entity.getProdutos().stream().map(p -> p.getProduto().getId()).findAny().orElse(0L))
 				.ifPresent(restaurante -> {
@@ -90,7 +85,36 @@ public class PedidoService extends CrudService<Pedido> {
 					}
 					entity.setRestaurante(restaurante);
 				});
+	}
 
+	private void setPrecoTotal(Pedido entity) {
+		BigDecimal precoProdutos = entity.getProdutos().stream().map(PedidoProduto::getPrecoProduto)
+				.reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+
+		BigDecimal precoComplementos = entity.getProdutos().stream().map(PedidoProduto::getPrecoComplementos)
+				.reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+
+		entity.setPrecoTotal(precoProdutos.add(precoComplementos));
+	}
+
+	private void setValor(Pedido entity) {
+		entity.getProdutos().forEach(produto -> {
+			produto.getComplementos().forEach(complemento -> {
+				complemento.setValorComplemento(
+						findObjeto(ProdutoComplemento.class, complemento.getProdutoComplemento().getId()).getValor());
+			});
+			produto.setPrecoProduto(findObjeto(Produto.class, produto.getProduto().getId()).getValor());
+		});
+	}
+
+	private void validUser(Pedido entity) {
+		Users userLogado = usersService.findUsersLogado();
+		pessoaRepository.findPessoaByUsersUsername(userLogado.getUsername()).ifPresentOrElse(pessoa -> {
+			entity.setPessoa(pessoa);
+			entity.getPagamento().setPessoa(pessoa);
+		}, () -> {
+			throw new AuthorizationServiceException("O Usuario não tem Permissão de realizar pedidos.");
+		});
 	}
 
 	private <T> T findObjeto(Class<T> classBuscado, Long id) {

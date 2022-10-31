@@ -52,4 +52,10 @@ public class PedidoProduto implements BaseEntity {
 	@JoinColumn(name = "id_midia")
 	private Midia midia;
 
+	public BigDecimal getPrecoComplementos() {
+		return complementos.stream()
+				.map(pc -> pc.getValorComplemento().multiply(BigDecimal.valueOf(pc.getQuantidade())))
+				.reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+	}
+
 }
