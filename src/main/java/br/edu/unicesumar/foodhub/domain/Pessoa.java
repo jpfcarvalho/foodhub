@@ -43,7 +43,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "pessoa")
 @JsonFilterFields(of = { "id", "nome", "sobrenome", "cpf", "telefone", "enderecos.id", "enderecos.numero",
-		"enderecos.complemento", "enderecos.cep", "enderecos.lougradouro", "enderecos.bairro", "enderecos.cidade.nome",
+		"enderecos.complemento", "enderecos.cep", "enderecos.logradouro", "enderecos.bairro", "enderecos.cidade.nome",
 		"enderecos.estado.nome", "enderecos.estado.uf", "enderecos.coordenadas.latitute",
 		"enderecos.coordenadas.longitude", "enderecos.principal", "enderecos.apelido", "pagamentos.id", "users.id",
 		"users.email" })

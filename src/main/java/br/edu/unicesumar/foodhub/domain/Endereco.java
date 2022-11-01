@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "endereco")
-@JsonFilterFields(of = { "id", "numero", "complemento", "cep", "lougradouro", "bairro", "cidade.nome", "estado.nome",
+@JsonFilterFields(of = { "id", "numero", "complemento", "cep", "logradouro", "bairro", "cidade.nome", "estado.nome",
 		"estado.uf", "coordenadas.latitute", "coordenadas.longitude", "principal", "apelido" })
 public class Endereco implements BaseEntity {
 
@@ -57,7 +57,7 @@ public class Endereco implements BaseEntity {
 
 	@NotEmpty
 	@Column(name = "lougradouro", nullable = false)
-	private String lougradouro;
+	private String logradouro;
 
 	@NotEmpty
 	@Column(name = "bairro", nullable = false)
