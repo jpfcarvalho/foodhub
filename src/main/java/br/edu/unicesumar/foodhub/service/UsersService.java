@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.unicesumar.foodhub.base.CrudService;
 import br.edu.unicesumar.foodhub.config.auth.jwt.Jwt;
 import br.edu.unicesumar.foodhub.config.auth.jwt.JwtTool;
 import br.edu.unicesumar.foodhub.domain.Users;
@@ -23,7 +24,7 @@ import br.edu.unicesumar.foodhub.dto.sign.SignIn;
 import br.edu.unicesumar.foodhub.repository.UsersRepository;
 
 @Service
-public class UsersService implements UserDetailsService {
+public class UsersService extends CrudService<Users> implements UserDetailsService {
 
 	@Lazy
 	@Autowired
