@@ -37,7 +37,7 @@ import lombok.NoArgsConstructor;
 @JsonFilterFields(of = { "id", "precoTotal", "dataHora", "statusPedido.status", "pagamento.id", "pessoa.id",
 		"produtos.id", "produtos.precoProduto", "produtos.produto.id", "produtos.complementos.id",
 		"produtos.complementos.valorComplemento", "produtos.complementos.quantidade",
-		"produtos.complementos.produtoComplemento.id" })
+		"produtos.complementos.produtoComplemento.id", "endereco.id" })
 public class Pedido implements BaseEntity {
 
 	@Id

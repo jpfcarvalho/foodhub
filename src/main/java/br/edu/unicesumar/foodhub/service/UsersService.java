@@ -52,6 +52,10 @@ public class UsersService implements UserDetailsService {
 
 		Users userDetails = (Users) authentication.getPrincipal();
 
+		if (!userDetails.getRoles().stream().anyMatch(r -> r.getAuthority().equals(signIn.getRoles()))) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não autorizado!");
+		}
+
 		return jwtTokenTool.generateToken(userDetails);
 
 	}
