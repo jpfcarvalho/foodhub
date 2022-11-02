@@ -2,11 +2,10 @@ package br.edu.unicesumar.foodhub.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import br.edu.unicesumar.foodhub.base.CrudRepository;
 import br.edu.unicesumar.foodhub.domain.Restaurante;
 
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends CrudRepository<Restaurante> {
 
 	Optional<Restaurante> findRestauranteByUsersUsername(String username);
 

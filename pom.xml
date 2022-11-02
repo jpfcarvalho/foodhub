@@ -93,6 +93,11 @@
     		<artifactId>aws-java-sdk-s3</artifactId>
     		<version>1.12.305</version>
 		</dependency>
+  		<dependency>
+    		<groupId>io.github.perplexhub</groupId>
+    		<artifactId>rsql-jpa-spring-boot-starter</artifactId>
+    		<version>5.0.26</version>
+  		</dependency>
 	</dependencies>
 
 	<build>
