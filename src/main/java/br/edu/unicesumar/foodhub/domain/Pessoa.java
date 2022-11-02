@@ -44,9 +44,9 @@ import lombok.ToString;
 @Table(name = "pessoa")
 @JsonFilterFields(of = { "id", "nome", "sobrenome", "cpf", "telefone", "enderecos.id", "enderecos.numero",
 		"enderecos.complemento", "enderecos.cep", "enderecos.logradouro", "enderecos.bairro", "enderecos.cidade.id",
-		"enderecos.cidade.nome", "enderecos.estado.nome", "enderecos.estado.uf", "enderecos.coordenadas.latitute",
-		"enderecos.coordenadas.longitude", "enderecos.principal", "enderecos.apelido", "pagamentos.id", "users.id",
-		"users.email" })
+		"enderecos.cidade.nome", "enderecos.cidade.estado.nome", "enderecos.cidade.estado.uf",
+		"enderecos.coordenadas.latitute", "enderecos.coordenadas.longitude", "enderecos.principal", "enderecos.apelido",
+		"pagamentos.id", "users.id", "users.email" })
 public class Pessoa implements BaseEntity {
 
 	@Id
