@@ -1,5 +1,6 @@
 package br.edu.unicesumar.foodhub.base;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,8 @@ public abstract class LoadController<T extends BaseEntity> {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<T>> findAll(@RequestParam(value = "filter", required = false) String filter,
+	public ResponseEntity<Page<T>> findAll(
+			@RequestParam(value = "filter", required = false, defaultValue = StringUtils.EMPTY) String filter,
 			Pageable pageable) {
 		return ResponseEntity.ok(service.findAll(filter, pageable));
 	}
