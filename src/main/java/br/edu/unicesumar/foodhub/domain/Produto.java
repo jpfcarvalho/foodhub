@@ -35,13 +35,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "produto")
-@JsonFilterFields(of = { "id", "nome", "descricao", "valor", "ativo", "gruposComplementos.id",
+@JsonFilterFields(of = { "id", "nome", "descricao", "valor", "ativo", "grupo.id", "gruposComplementos.id",
 		"gruposComplementos.nome", "gruposComplementos.obrigatorio", "gruposComplementos.quantidadeMinima",
 		"gruposComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.id",
 		"gruposComplementos.produtosComplementos.nome", "gruposComplementos.produtosComplementos.descricao",
 		"gruposComplementos.produtosComplementos.valor", "gruposComplementos.produtosComplementos.quantidadeMinima",
 		"gruposComplementos.produtosComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.ativo",
-		"midias.id", "grupo.id" })
+		"midias.id" })
 public class Produto implements BaseEntity {
 
 	@Id

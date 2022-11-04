@@ -40,7 +40,7 @@ import lombok.NoArgsConstructor;
 		"produto.gruposComplementos.produtosComplementos.valor",
 		"produto.gruposComplementos.produtosComplementos.quantidadeMinima",
 		"produto.gruposComplementos.produtosComplementos.quantidadeMaxima",
-		"produto.gruposComplementos.produtosComplementos.ativo" })
+		"produto.gruposComplementos.produtosComplementos.ativo", "restaurante.id" })
 public class Grupo implements BaseEntity {
 
 	@Id
