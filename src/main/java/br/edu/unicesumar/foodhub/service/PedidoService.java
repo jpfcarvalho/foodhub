@@ -67,7 +67,7 @@ public class PedidoService extends CrudService<Pedido> {
 
 	@Override
 	protected void beforeInsert(Pedido entity) {
-		validUser(entity);
+		validSetUser(entity);
 
 		setValor(entity);
 
@@ -107,7 +107,7 @@ public class PedidoService extends CrudService<Pedido> {
 		});
 	}
 
-	private void validUser(Pedido entity) {
+	private void validSetUser(Pedido entity) {
 		Users userLogado = usersService.findUsersLogado();
 		pessoaRepository.findPessoaByUsersUsername(userLogado.getUsername()).ifPresentOrElse(pessoa -> {
 			entity.setPessoa(pessoa);
