@@ -18,9 +18,8 @@ public class FuncionamentoController extends LoadController<Funcionamento> {
 	private FuncionamentoService funcionamentoService;
 
 	@PutMapping("/abertura")
-	public ResponseEntity<Void> abertura() {
-		funcionamentoService.abertura();
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Boolean> abertura() {
+		return ResponseEntity.ok(funcionamentoService.abertura());
 	}
 
 }

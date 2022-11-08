@@ -1,5 +1,7 @@
 package br.edu.unicesumar.foodhub.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -24,15 +26,19 @@ public class ProdutoService extends CrudService<Produto> {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
-	public void atualizarDisponibilidadeProduto(Long idProduto) {
+	public Boolean atualizarDisponibilidadeProduto(Long idProduto) {
 		validRestaurante();
 
-		produtoRepository.findById(idProduto).ifPresentOrElse(produto -> {
+		Optional<Produto> produtoOpt = produtoRepository.findById(idProduto);
+
+		if (produtoOpt.isPresent()) {
+			Produto produto = produtoOpt.get();
 			produto.setAtivo(!produto.getAtivo());
 			produtoRepository.save(produto);
-		}, () -> {
+			return produto.getAtivo();
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Registro não encontrado");
-		});
+		}
 
 	}
 

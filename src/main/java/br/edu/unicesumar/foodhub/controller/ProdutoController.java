@@ -19,9 +19,8 @@ public class ProdutoController extends CrudController<Produto> {
 	private ProdutoService produtoService;
 
 	@PutMapping("/atualizar-disponibilidade/{idProduto}")
-	public ResponseEntity<Void> update(@PathVariable(name = "idProduto") Long idProduto) {
-		produtoService.atualizarDisponibilidadeProduto(idProduto);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Boolean> update(@PathVariable(name = "idProduto") Long idProduto) {
+		return ResponseEntity.ok(produtoService.atualizarDisponibilidadeProduto(idProduto));
 	}
 
 }

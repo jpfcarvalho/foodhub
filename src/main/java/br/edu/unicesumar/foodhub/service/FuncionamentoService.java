@@ -21,16 +21,19 @@ public class FuncionamentoService extends LoadService<Funcionamento> {
 	@Autowired
 	private UsersService usersService;
 
-	public void abertura() {
+	public Boolean abertura() {
 		Users userLogado = usersService.findUsersLogado();
 		Optional<Restaurante> restauranteOpt = restauranteRepository
 				.findRestauranteByUsersUsername(userLogado.getUsername());
-		restauranteOpt.ifPresentOrElse(restaurante -> {
+
+		if (restauranteOpt.isPresent()) {
+			Restaurante restaurante = restauranteOpt.get();
 			restaurante.getFuncionamento().setAberto(!restaurante.getFuncionamento().getAberto());
 			restauranteRepository.save(restaurante);
-		}, () -> {
+			return restaurante.getFuncionamento().getAberto();
+		} else {
 			throw new AuthorizationServiceException("O Usuario não tem Permissão de abetura");
-		});
+		}
 
 	}
 
