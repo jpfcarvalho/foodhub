@@ -43,15 +43,22 @@ public class PedidoService extends CrudService<Pedido> {
 	@Autowired
 	private EntityManager em;
 
-	public void atualizarStatusPedido(Long idPedido) {
+	public void atualizarStatusPedido(Long idPedido, Boolean cancelar) {
 
 		Optional<Pedido> pedidoOpt = getRepository().findById(idPedido);
 		pedidoOpt.ifPresentOrElse(pedido -> {
 			if (pedido.getStatusPedido().getId().equals(StatusPedido.FINALIZADO.getValue())) {
 				throw new IllegalArgumentException("Pedido já foi finalizado");
+			} else if (pedido.getStatusPedido().getId().equals(StatusPedido.RECUSADO.getValue())) {
+				throw new IllegalArgumentException("Pedido foi recusado");
 			}
 
-			pedido.setStatusPedido(statusPedidoRepository.getOne(pedido.getStatusPedido().getId() + UM_LONG));
+			if (cancelar) {
+				pedido.setStatusPedido(statusPedidoRepository.getOne(StatusPedido.RECUSADO.getValue()));
+			} else {
+				pedido.setStatusPedido(statusPedidoRepository.getOne(pedido.getStatusPedido().getId() + UM_LONG));
+			}
+
 			getRepository().save(pedido);
 
 		}, () -> {

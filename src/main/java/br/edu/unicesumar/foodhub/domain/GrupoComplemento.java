@@ -46,11 +46,11 @@ public class GrupoComplemento implements BaseEntity {
 
 	@NotNull
 	@Column(name = "quantidade_minima", nullable = false)
-	private Long quantidadeMinima;
+	private Long quantidadeMinima = 1L;
 
 	@NotNull
 	@Column(name = "quantidade_maxima", nullable = false)
-	private Long quantidadeMaxima;
+	private Long quantidadeMaxima = 10L;
 
 	@NotNull
 	@Size(min = 1)

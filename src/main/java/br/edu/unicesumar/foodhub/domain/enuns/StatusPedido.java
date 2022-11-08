@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum StatusPedido {
 
-	ABERTO(1L, "Aberto"), PREPARANDO(2L, "Preparando"), ENTREGA(3L, "Entrega"), FINALIZADO(4L, "Finalizado");
+	ABERTO(1L, "Aberto"), EM_PREPARO(2L, "Em preparo"), SAIU_PARA_ENTREGA(3L, "Saiu para entrega"),
+	FINALIZADO(4L, "Finalizado"), RECUSADO(5L, "Recusado");
 
 	private Long value;
 	private String descricao;
@@ -25,11 +26,13 @@ public enum StatusPedido {
 		case 1:
 			return ABERTO;
 		case 2:
-			return PREPARANDO;
+			return EM_PREPARO;
 		case 3:
-			return ENTREGA;
+			return SAIU_PARA_ENTREGA;
 		case 4:
 			return FINALIZADO;
+		case 5:
+			return RECUSADO;
 		default:
 			return null;
 		}
