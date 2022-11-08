@@ -20,10 +20,9 @@ public class PedidoController extends CrudController<Pedido> {
 	private PedidoService pedidoService;
 
 	@PutMapping("/atualizar-status/{idPedido}")
-	public ResponseEntity<Void> update(@PathVariable(name = "idPedido") Long idPedido,
+	public ResponseEntity<String> update(@PathVariable(name = "idPedido") Long idPedido,
 			@RequestParam(value = "cancelar", required = false, defaultValue = "false") Boolean cancelar) {
-		pedidoService.atualizarStatusPedido(idPedido, cancelar);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(pedidoService.atualizarStatusPedido(idPedido, cancelar));
 	}
 
 }

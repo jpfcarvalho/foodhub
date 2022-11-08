@@ -43,10 +43,14 @@ public class PedidoService extends CrudService<Pedido> {
 	@Autowired
 	private EntityManager em;
 
-	public void atualizarStatusPedido(Long idPedido, Boolean cancelar) {
+	public String atualizarStatusPedido(Long idPedido, Boolean cancelar) {
 
 		Optional<Pedido> pedidoOpt = getRepository().findById(idPedido);
-		pedidoOpt.ifPresentOrElse(pedido -> {
+
+		if (pedidoOpt.isPresent()) {
+			String statusReturn;
+			Pedido pedido = pedidoOpt.get();
+
 			if (pedido.getStatusPedido().getId().equals(StatusPedido.FINALIZADO.getValue())) {
 				throw new IllegalArgumentException("Pedido já foi finalizado");
 			} else if (pedido.getStatusPedido().getId().equals(StatusPedido.RECUSADO.getValue())) {
@@ -55,15 +59,19 @@ public class PedidoService extends CrudService<Pedido> {
 
 			if (cancelar) {
 				pedido.setStatusPedido(statusPedidoRepository.getOne(StatusPedido.RECUSADO.getValue()));
+				statusReturn = StatusPedido.RECUSADO.getDescricao();
 			} else {
-				pedido.setStatusPedido(statusPedidoRepository.getOne(pedido.getStatusPedido().getId() + UM_LONG));
+				br.edu.unicesumar.foodhub.domain.StatusPedido statusPedido = statusPedidoRepository
+						.getOne(pedido.getStatusPedido().getId() + UM_LONG);
+				pedido.setStatusPedido(statusPedido);
+				statusReturn = statusPedido.getStatus();
 			}
 
 			getRepository().save(pedido);
-
-		}, () -> {
+			return statusReturn;
+		} else {
 			throw new NotFoundException("Pedido não encontrado");
-		});
+		}
 
 	}
 
