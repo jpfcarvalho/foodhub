@@ -3,6 +3,7 @@ package br.edu.unicesumar.foodhub.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,7 +42,7 @@ import lombok.NoArgsConstructor;
 		"gruposComplementos.produtosComplementos.nome", "gruposComplementos.produtosComplementos.descricao",
 		"gruposComplementos.produtosComplementos.valor", "gruposComplementos.produtosComplementos.quantidadeMinima",
 		"gruposComplementos.produtosComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.ativo",
-		"midias.id" })
+		"midias.id", "grupoId" })
 public class Produto implements BaseEntity {
 
 	@Id
@@ -79,4 +80,9 @@ public class Produto implements BaseEntity {
 	@JsonManagedReference("produto_midia")
 	@JsonIgnoreProperties({ "produto" })
 	private List<Midia> midias = new ArrayList<>();
+
+	public Long getGrupoId() {
+		return Optional.ofNullable(grupo).orElse(new Grupo()).getId();
+	}
+
 }

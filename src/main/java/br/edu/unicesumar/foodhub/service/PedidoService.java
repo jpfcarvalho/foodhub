@@ -1,6 +1,8 @@
 package br.edu.unicesumar.foodhub.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -84,9 +86,29 @@ public class PedidoService extends CrudService<Pedido> {
 	protected void beforeInsert(Pedido entity) {
 		validSetUser(entity);
 
+		setProdutos(entity);
+
 		setValor(entity);
 
 		setRestaurante(entity);
+
+	}
+
+	private void setProdutos(Pedido entity) {
+
+		List<PedidoProduto> produtos = new ArrayList<>();
+
+		entity.getProdutos().forEach(produto -> {
+
+			for (int i = 0; i < produto.getQuantidade(); i++) {
+				em.detach(produto);
+				produtos.add(PedidoProduto.of(produto));
+			}
+
+		});
+
+		entity.getProdutos().clear();
+		entity.getProdutos().addAll(produtos);
 
 	}
 
