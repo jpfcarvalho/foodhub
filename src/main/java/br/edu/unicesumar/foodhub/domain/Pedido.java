@@ -2,6 +2,7 @@ package br.edu.unicesumar.foodhub.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +36,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "pedido")
 @JsonFilterFields(of = { "id", "precoTotal", "dataHora", "statusPedido.status", "pagamento.id", "pessoa.id",
-		"produtos.id", "produtos.precoProduto", "produtos.produto.id", "produtos.complementos.id",
-		"produtos.complementos.valorComplemento", "produtos.complementos.quantidade",
-		"produtos.complementos.produtoComplemento.id", "endereco.id" })
+		"pessoa.nome", "pessoa.sobrenome", "produtos.id", "produtos.precoProduto", "produtos.produto.id",
+		"produtos.produto.nome", "produtos.complementos.id", "produtos.complementos.valorComplemento",
+		"produtos.complementos.quantidade", "produtos.complementos.produtoComplemento.id",
+		"produtos.complementos.produtoComplemento.nome", "endereco.id", "endereco.numero", "endereco.complemento",
+		"endereco.cep", "endereco.logradouro", "endereco.bairro", "endereco.cidade.nome" })
 public class Pedido implements BaseEntity {
 
 	@Id
@@ -51,7 +54,7 @@ public class Pedido implements BaseEntity {
 
 	@NotNull
 	@Column(name = "data_hora", nullable = false)
-	private LocalDateTime dataHora = LocalDateTime.now();
+	private LocalDateTime dataHora = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
 	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)

@@ -2,6 +2,7 @@ package br.edu.unicesumar.foodhub.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +48,7 @@ public class Comentario implements BaseEntity {
 
 	@NotNull
 	@Column(name = "data_publicacao", nullable = false)
-	private LocalDateTime dataPublicacao = LocalDateTime.now();
+	private LocalDateTime dataPublicacao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JsonBackReference("pessoa_comentario")
