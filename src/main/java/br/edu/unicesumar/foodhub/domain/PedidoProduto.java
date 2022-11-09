@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
@@ -44,6 +45,9 @@ public class PedidoProduto implements BaseEntity {
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 
+	@Transient
+	private Long quantidade = 1L;
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_pedido_produto", nullable = false)
 	private List<PedidoComplementoProduto> complementos = new ArrayList<>();
@@ -56,6 +60,19 @@ public class PedidoProduto implements BaseEntity {
 		return complementos.stream()
 				.map(pc -> pc.getValorComplemento().multiply(BigDecimal.valueOf(pc.getQuantidade())))
 				.reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+	}
+
+	public static PedidoProduto of(PedidoProduto pedidoProduto) {
+
+		PedidoProduto newPedidoProduto = new PedidoProduto();
+		newPedidoProduto.setId(null);
+		newPedidoProduto.setPrecoProduto(pedidoProduto.getPrecoProduto());
+		newPedidoProduto.setProduto(pedidoProduto.getProduto());
+		pedidoProduto.getComplementos().forEach(
+				complemento -> newPedidoProduto.getComplementos().add(PedidoComplementoProduto.of(complemento)));
+		newPedidoProduto.setMidia(pedidoProduto.getMidia());
+
+		return newPedidoProduto;
 	}
 
 }

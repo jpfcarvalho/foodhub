@@ -43,4 +43,15 @@ public class PedidoComplementoProduto implements BaseEntity {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto_complemento", nullable = false)
 	private ProdutoComplemento produtoComplemento;
+
+	public static PedidoComplementoProduto of(PedidoComplementoProduto pedidoComplementoProduto) {
+
+		PedidoComplementoProduto newPedidoComplementoProduto = new PedidoComplementoProduto();
+		newPedidoComplementoProduto.setId(null);
+		newPedidoComplementoProduto.setValorComplemento(pedidoComplementoProduto.getValorComplemento());
+		newPedidoComplementoProduto.setQuantidade(pedidoComplementoProduto.getQuantidade());
+		newPedidoComplementoProduto.setProdutoComplemento(pedidoComplementoProduto.getProdutoComplemento());
+
+		return newPedidoComplementoProduto;
+	}
 }
