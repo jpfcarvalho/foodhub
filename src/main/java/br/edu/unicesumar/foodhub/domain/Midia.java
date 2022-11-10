@@ -1,6 +1,7 @@
 package br.edu.unicesumar.foodhub.domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class Midia implements BaseEntity {
 	@NotNull
 	@Builder.Default
 	@Column(name = "data_publicacao", nullable = false)
-	private LocalDateTime dataPublicacao = LocalDateTime.now();
+	private LocalDateTime dataPublicacao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
 	@NotEmpty
 	@Column(name = "caminho", nullable = false)

@@ -1,5 +1,7 @@
 package br.edu.unicesumar.foodhub.domain;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
@@ -32,8 +34,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "endereco")
-@JsonFilterFields(of = { "id", "numero", "complemento", "cep", "lougradouro", "bairro", "cidade.nome", "estado.nome",
-		"estado.uf", "coordenadas.latitute", "coordenadas.longitude", "principal", "apelido" })
+@JsonFilterFields(of = { "id", "numero", "complemento", "cep", "logradouro", "bairro", "cidade.id", "cidade.nome",
+		"cidade.estado.nome", "cidade.estado.uf", "coordenadas.latitute", "coordenadas.longitude", "principal",
+		"apelido", "pessoaId" })
 public class Endereco implements BaseEntity {
 
 	private static final String MENSAGEM_CEP = "Tamanho do CEP invalido.";
@@ -57,7 +60,7 @@ public class Endereco implements BaseEntity {
 
 	@NotEmpty
 	@Column(name = "lougradouro", nullable = false)
-	private String lougradouro;
+	private String logradouro;
 
 	@NotEmpty
 	@Column(name = "bairro", nullable = false)
@@ -82,5 +85,9 @@ public class Endereco implements BaseEntity {
 	@JsonIgnoreProperties({ "enderecos" })
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
+
+	public Long getPessoaId() {
+		return Optional.ofNullable(pessoa).orElse(new Pessoa()).getId();
+	}
 
 }

@@ -40,11 +40,12 @@ import lombok.ToString;
 @Entity
 @Table(name = "restaurante")
 @JsonFilterFields(of = { "id", "razaoSocial", "nomeFantasia", "cpfCnpj", "telefone", "endereco.id", "endereco.numero",
-		"endereco.complemento", "endereco.cep", "endereco.lougradouro", "endereco.bairro", "endereco.cidade.nome",
+		"endereco.complemento", "endereco.cep", "endereco.logradouro", "endereco.bairro", "endereco.cidade.nome",
 		"endereco.estado.nome", "endereco.estado.uf", "endereco.coordenadas.latitute", "endereco.coordenadas.longitude",
 		"endereco.principal", "endereco.apelido", "categoria.id", "categoria.tipo", "users.id", "users.email",
-		"grupos.id", "funcionamento.id", "funcionamento.raioFuncionamentoKm", "funcionamento.diasFuncionamentos.id",
-		"funcionamento.diasFuncionamentos.diaSemana", "funcionamento.diasFuncionamentos.aberturasEncerramentos.id",
+		"grupos.id", "funcionamento.id", "funcionamento.raioFuncionamentoKm", "funcionamento.aberto",
+		"funcionamento.diasFuncionamentos.id", "funcionamento.diasFuncionamentos.diaSemana",
+		"funcionamento.diasFuncionamentos.aberturasEncerramentos.id",
 		"funcionamento.diasFuncionamentos.aberturasEncerramentos.horaAbertura",
 		"funcionamento.diasFuncionamentos.aberturasEncerramentos.horaEncerramento", "pedidos.id" })
 public class Restaurante implements BaseEntity {

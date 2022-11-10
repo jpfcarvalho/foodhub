@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +40,7 @@ import lombok.NoArgsConstructor;
 		"produto.gruposComplementos.produtosComplementos.valor",
 		"produto.gruposComplementos.produtosComplementos.quantidadeMinima",
 		"produto.gruposComplementos.produtosComplementos.quantidadeMaxima",
-		"produto.gruposComplementos.produtosComplementos.ativo" })
+		"produto.gruposComplementos.produtosComplementos.ativo", "restaurante.id" })
 public class Grupo implements BaseEntity {
 
 	@Id
@@ -59,7 +58,7 @@ public class Grupo implements BaseEntity {
 	private List<Produto> produtos = new ArrayList<>();
 
 	@NotNull
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JsonBackReference("restaurante_grupo")
 	@JsonIgnoreProperties({ "grupos" })
 	@JoinColumn(name = "id_restaurante", nullable = false)

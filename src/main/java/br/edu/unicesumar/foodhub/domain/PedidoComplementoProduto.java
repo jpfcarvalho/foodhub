@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
@@ -32,11 +31,11 @@ public class PedidoComplementoProduto implements BaseEntity {
 	@SequenceGenerator(name = "S_PEDIDO_COMPLEMENTO_PRODUTO", sequenceName = "S_PEDIDO_COMPLEMENTO_PRODUTO", allocationSize = 1)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "valor_complemento", nullable = false)
 	private BigDecimal valorComplemento;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "quantidade", nullable = false)
 	private Long quantidade;
 
@@ -44,4 +43,15 @@ public class PedidoComplementoProduto implements BaseEntity {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto_complemento", nullable = false)
 	private ProdutoComplemento produtoComplemento;
+
+	public static PedidoComplementoProduto of(PedidoComplementoProduto pedidoComplementoProduto) {
+
+		PedidoComplementoProduto newPedidoComplementoProduto = new PedidoComplementoProduto();
+		newPedidoComplementoProduto.setId(null);
+		newPedidoComplementoProduto.setValorComplemento(pedidoComplementoProduto.getValorComplemento());
+		newPedidoComplementoProduto.setQuantidade(pedidoComplementoProduto.getQuantidade());
+		newPedidoComplementoProduto.setProdutoComplemento(pedidoComplementoProduto.getProdutoComplemento());
+
+		return newPedidoComplementoProduto;
+	}
 }

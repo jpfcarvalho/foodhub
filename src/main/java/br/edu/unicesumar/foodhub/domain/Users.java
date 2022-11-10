@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.config.auth.Roles;
 import br.edu.unicesumar.foodhub.config.filter.SelectBeanPropertyFilter;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "users")
 @JsonFilter(SelectBeanPropertyFilter.FILTER_NAME)
-public class Users implements UserDetails {
+public class Users implements UserDetails, BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 

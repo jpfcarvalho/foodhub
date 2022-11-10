@@ -25,4 +25,10 @@ public class StatusPedido implements BaseEntity {
 	@Column(name = "status", nullable = false)
 	private String status;
 
+	public static StatusPedido of(Long id) {
+		StatusPedido statusPedido = new StatusPedido();
+		statusPedido.setId(id);
+		return statusPedido;
+	}
+
 }

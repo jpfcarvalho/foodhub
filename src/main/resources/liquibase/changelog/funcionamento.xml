@@ -36,4 +36,19 @@
                         sequenceName="S_FUNCIONAMENTO" startValue="1"/>
     </changeSet>
     
+    <changeSet author="joao.carvalho" id="INSERT_ABERTO_FUNCIONAMENTO">
+    	<validCheckSum>ANY</validCheckSum>
+    	<preConditions onFail="MARK_RAN"
+                       onFailMessage="A coluna ABERTO já existe">
+            <not>
+                <columnExists tableName="FUNCIONAMENTO" columnName="ABERTO"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="FUNCIONAMENTO">
+        	<column name="ABERTO" type="CHAR(1)" defaultValue="N">
+        		<constraints nullable="false"/>
+        	</column>
+        </addColumn>
+    </changeSet>
+    
 </databaseChangeLog>

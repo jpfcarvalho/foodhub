@@ -1,8 +1,11 @@
 package br.edu.unicesumar.foodhub.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.unicesumar.foodhub.base.CrudService;
 import br.edu.unicesumar.foodhub.config.auth.jwt.Jwt;
 import br.edu.unicesumar.foodhub.config.auth.jwt.JwtTool;
 import br.edu.unicesumar.foodhub.domain.Users;
@@ -20,7 +24,7 @@ import br.edu.unicesumar.foodhub.dto.sign.SignIn;
 import br.edu.unicesumar.foodhub.repository.UsersRepository;
 
 @Service
-public class UsersService implements UserDetailsService {
+public class UsersService extends CrudService<Users> implements UserDetailsService {
 
 	@Lazy
 	@Autowired
@@ -49,6 +53,10 @@ public class UsersService implements UserDetailsService {
 
 		Users userDetails = (Users) authentication.getPrincipal();
 
+		if (!userDetails.getRoles().stream().anyMatch(r -> r.getAuthority().equals(signIn.getRoles()))) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não autorizado!");
+		}
+
 		return jwtTokenTool.generateToken(userDetails);
 
 	}
@@ -68,6 +76,13 @@ public class UsersService implements UserDetailsService {
 		entity.setPassword(pass);
 
 		return usersRepository.save(entity);
+	}
+
+	public Users findUsersLogado() {
+
+		return Optional.ofNullable((Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+				.orElseThrow(() -> new AuthorizationServiceException("Usuario não encontrado"));
+
 	}
 
 }

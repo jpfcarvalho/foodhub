@@ -1,6 +1,7 @@
 package br.edu.unicesumar.foodhub.dto;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class MidiaDTO {
 
 	private List<String> tags = new ArrayList<>();
 
-	private LocalDateTime dataPublicacao = LocalDateTime.now();
+	private LocalDateTime dataPublicacao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
 	private Boolean fotoPrincipal = Boolean.TRUE;
 

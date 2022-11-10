@@ -3,12 +3,12 @@ package br.edu.unicesumar.foodhub.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,13 +36,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "produto")
-@JsonFilterFields(of = { "id", "nome", "descricao", "valor", "ativo", "gruposComplementos.id",
+@JsonFilterFields(of = { "id", "nome", "descricao", "valor", "ativo", "grupo.id", "gruposComplementos.id",
 		"gruposComplementos.nome", "gruposComplementos.obrigatorio", "gruposComplementos.quantidadeMinima",
 		"gruposComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.id",
 		"gruposComplementos.produtosComplementos.nome", "gruposComplementos.produtosComplementos.descricao",
 		"gruposComplementos.produtosComplementos.valor", "gruposComplementos.produtosComplementos.quantidadeMinima",
 		"gruposComplementos.produtosComplementos.quantidadeMaxima", "gruposComplementos.produtosComplementos.ativo",
-		"midias.id" })
+		"midias.id", "grupoId" })
 public class Produto implements BaseEntity {
 
 	@Id
@@ -70,7 +70,7 @@ public class Produto implements BaseEntity {
 	private List<GrupoComplemento> gruposComplementos = new ArrayList<>();
 
 	@NotNull
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JsonBackReference("grupo_produto")
 	@JsonIgnoreProperties({ "produtos" })
 	@JoinColumn(name = "id_grupo", nullable = false)
@@ -80,4 +80,9 @@ public class Produto implements BaseEntity {
 	@JsonManagedReference("produto_midia")
 	@JsonIgnoreProperties({ "produto" })
 	private List<Midia> midias = new ArrayList<>();
+
+	public Long getGrupoId() {
+		return Optional.ofNullable(grupo).orElse(new Grupo()).getId();
+	}
+
 }

@@ -13,4 +13,7 @@ public class SignIn {
 	@NotEmpty
 	private String password;
 
+	@NotEmpty
+	private String roles;
+
 }

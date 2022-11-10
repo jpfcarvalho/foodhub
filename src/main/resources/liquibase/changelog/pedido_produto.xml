@@ -79,5 +79,36 @@
                 referencedColumnNames="ID" referencedTableName="MIDIA"/>
     </changeSet>
     
+    <changeSet author="joao.carvalho" id="INSERT_ID_PEDIDO_PEDIDO_PRODUTO">
+    	<validCheckSum>ANY</validCheckSum>
+    	<preConditions onFail="MARK_RAN"
+                       onFailMessage="A coluna ID_PEDIDO já existe">
+            <not>
+                <columnExists tableName="PEDIDO_PRODUTO" columnName="ID_PEDIDO"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="PEDIDO_PRODUTO">
+        	<column name="ID_PEDIDO" type="NUMERIC(10,0)">
+        		<constraints nullable="false"/>
+        	</column>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet author="felipe.magrinelli" id="FK_PEDIDO_PRODUTO_PEDIDO">
+        <validCheckSum>ANY</validCheckSum>
+        <preConditions onFail="MARK_RAN"
+                       onFailMessage="A constraint FK_PEDIDO_PRODUTO_PEDIDO já existe">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyName="FK_PEDIDO_PRODUTO_PEDIDO"
+                        foreignKeyTableName="PEDIDO_PRODUTO"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint
+                baseColumnNames="ID_PEDIDO"
+                baseTableName="PEDIDO_PRODUTO"
+                constraintName="FK_PEDIDO_PRODUTO_PEDIDO"
+                referencedColumnNames="ID" referencedTableName="PEDIDO"/>
+    </changeSet>
     
 </databaseChangeLog>

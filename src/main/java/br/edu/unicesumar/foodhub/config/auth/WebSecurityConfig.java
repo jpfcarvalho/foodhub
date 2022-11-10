@@ -12,11 +12,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig {
+
+	@SuppressWarnings("deprecation")
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+			}
+		};
+	}
 
 	@Bean
 	public AuthenticationFilter authenticationTokenFilterBean() {
@@ -39,8 +53,9 @@ public class WebSecurityConfig {
 			throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/", "/**/auth/**", "/**/**/signup", "/swagger-ui/**").permitAll().anyRequest()
-				.authenticated();
+				.antMatchers("/", "/**/auth/**", "/**/estados/**", "/**/cidades/**", "/**/categorias/**",
+						"/**/**/signup", "/swagger-ui/**")
+				.permitAll().anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		return http.build();
