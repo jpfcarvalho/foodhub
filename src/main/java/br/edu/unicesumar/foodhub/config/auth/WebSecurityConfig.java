@@ -53,7 +53,8 @@ public class WebSecurityConfig {
 			throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/", "/**/auth/**", "/**/estados/**", "/**/cidades/**", "/**/**/signup", "/swagger-ui/**")
+				.antMatchers("/", "/**/auth/**", "/**/estados/**", "/**/cidades/**", "/**/categorias/**",
+						"/**/**/signup", "/swagger-ui/**")
 				.permitAll().anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
