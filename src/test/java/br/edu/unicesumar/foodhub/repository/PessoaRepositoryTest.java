@@ -152,7 +152,7 @@ public class PessoaRepositoryTest {
 		assertThat(beforeAdd.getEnderecos().get(0).getId(), notNullValue());
 		assertThat(beforeAdd.getEnderecos().get(0).getNumero(), equalTo("1"));
 		assertThat(beforeAdd.getEnderecos().get(0).getCep(), equalTo("87075444"));
-		assertThat(beforeAdd.getEnderecos().get(0).getLougradouro(), equalTo("Rua Teste"));
+		assertThat(beforeAdd.getEnderecos().get(0).getLogradouro(), equalTo("Rua Teste"));
 		assertThat(beforeAdd.getEnderecos().get(0).getBairro(), equalTo("Bairro Teste"));
 		assertThat(beforeAdd.getEnderecos().get(0).getCidade(), notNullValue());
 		assertThat(beforeAdd.getEnderecos().get(0).getCoordenadas(), notNullValue());

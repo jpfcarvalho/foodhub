@@ -50,6 +50,9 @@ public class ProdutoRepositoryTest {
 
 		Produto produto = Fixtures.createProduto(1L);
 		produto.getGruposComplementos().add(Fixtures.createGrupoComplemento(1L));
+		Grupo grupo = Fixtures.createGrupo(1L);
+		grupo.setRestaurante(restauranteRepository.save(Fixtures.createRestaurante(1L)));
+		produto.setGrupo(grupoRepository.save(grupo));
 
 		Produto result = repository.save(produto);
 
@@ -85,6 +88,9 @@ public class ProdutoRepositoryTest {
 
 		Produto produto = Fixtures.createProduto(1L);
 		produto.getGruposComplementos().add(Fixtures.createGrupoComplemento(1L));
+		Grupo grupo = Fixtures.createGrupo(1L);
+		grupo.setRestaurante(restauranteRepository.save(Fixtures.createRestaurante(1L)));
+		produto.setGrupo(grupoRepository.save(grupo));
 
 		Produto saved = repository.save(produto);
 		saved.setNome("Produto Atualizado");
@@ -121,7 +127,13 @@ public class ProdutoRepositoryTest {
 	@Test
 	public void deleteProduto() {
 
-		Produto saved = repository.save(Fixtures.createProduto(1L));
+		Produto produto = Fixtures.createProduto(1L);
+		produto.getGruposComplementos().add(Fixtures.createGrupoComplemento(1L));
+		Grupo grupo = Fixtures.createGrupo(1L);
+		grupo.setRestaurante(restauranteRepository.save(Fixtures.createRestaurante(1L)));
+		produto.setGrupo(grupoRepository.save(grupo));
+
+		Produto saved = repository.save(produto);
 
 		Produto beforeDelete = em.find(Produto.class, saved.getId());
 
@@ -139,7 +151,9 @@ public class ProdutoRepositoryTest {
 
 		Produto produto = Fixtures.createProduto(1L);
 		produto.getGruposComplementos().add(Fixtures.createGrupoComplemento(1L));
-
+		Grupo grupo = Fixtures.createGrupo(1L);
+		grupo.setRestaurante(restauranteRepository.save(Fixtures.createRestaurante(1L)));
+		produto.setGrupo(grupoRepository.save(grupo));
 		Produto saved = repository.save(produto);
 
 		Produto result = repository.findById(saved.getId()).get();

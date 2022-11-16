@@ -25,9 +25,9 @@
 		<include file="changelog/produto_complemento.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/status_pedido.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/pagamento.xml" relativeToChangelogFile="true"/>
+		<include file="changelog/pedido.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/pedido_produto.xml" relativeToChangelogFile="true"/>
 		<include file="changelog/pedido_complemento_produto.xml" relativeToChangelogFile="true"/>
-		<include file="changelog/pedido.xml" relativeToChangelogFile="true"/>
 		
 		<!-- INSERTS PADRÃO-->
 		<include file="insert/insert_status_pedido.xml" relativeToChangelogFile="true"/>

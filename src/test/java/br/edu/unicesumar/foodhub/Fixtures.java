@@ -26,7 +26,7 @@ public final class Fixtures {
 		endereco.setId(id);
 		endereco.setNumero("1");
 		endereco.setCep("87075444");
-		endereco.setLougradouro("Rua Teste");
+		endereco.setLogradouro("Rua Teste");
 		endereco.setBairro("Bairro Teste");
 		endereco.setCidade(createCidade(id));
 		endereco.setCoordenadas(new Coordenadas(1L, 1L));

@@ -41,7 +41,7 @@ public class StatusPedidoRepositoryTest {
 		List<StatusPedido> result = repository.findAll();
 
 		assertThat(result, notNullValue());
-		assertThat(result.size(), is(4));
+		assertThat(result.size(), is(5));
 
 	}
 
