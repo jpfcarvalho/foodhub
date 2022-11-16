@@ -5,13 +5,16 @@ import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.unicesumar.foodhub.base.LoadController;
 import br.edu.unicesumar.foodhub.domain.Midia;
@@ -40,6 +43,15 @@ public class MidiaController extends LoadController<Midia> {
 		return ResponseEntity.ok().contentLength(arquivo.contentLength())
 				.header("Content-type", "application/octet-stream")
 				.header("Content-disposition", "attachment; filename=\"" + caminho + "\"").body(arquivo);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteById(@PathVariable(name = "id") Long id) {
+		if (!midiaService.getRepository().existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Registro não encontrado");
+		}
+		midiaService.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 
 }
