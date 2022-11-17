@@ -27,10 +27,13 @@ public class FeedService {
 
 		List<Restaurante> restaurantes = restauranteService.getRepository().findAll();
 
-		restaurantes.forEach(restaurante -> {
+		restaurantes.stream().forEach(restaurante -> {
 			List<Produto> produtos = produtoRepository.findProdutos(restaurante.getId());
-			feed.add(FeedDTO.of(restaurante.getId(),
-					produtos.stream().filter(produto -> !produto.getMidias().isEmpty()).collect(Collectors.toList())));
+			List<Produto> produtosComMidia = produtos.stream().filter(produto -> !produto.getMidias().isEmpty())
+					.collect(Collectors.toList());
+			if (!produtosComMidia.isEmpty()) {
+				feed.add(FeedDTO.of(restaurante.getId(), produtosComMidia));
+			}
 		});
 
 		return feed;
