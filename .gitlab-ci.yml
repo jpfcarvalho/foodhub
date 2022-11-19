@@ -24,7 +24,7 @@ test:
 sonar:
   stage: analyze
   script:
-    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=foodhub-backend
+    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=foodhub
 
 # https://docs.gitlab.com/ee/ci/examples/deployment/
 deploy_heroku:
