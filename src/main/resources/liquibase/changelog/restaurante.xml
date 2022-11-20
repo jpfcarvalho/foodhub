@@ -17,9 +17,7 @@
                 <constraints nullable="false" primaryKey="true"
                              primaryKeyName="PK_RESTAURANTE"/>
             </column>
-            <column name="RAZAO_SOCIAL" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="RAZAO_SOCIAL" type="VARCHAR(255)"/>
             <column name="NOME_FANTASIA" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

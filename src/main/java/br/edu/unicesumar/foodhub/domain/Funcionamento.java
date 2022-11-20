@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.edu.unicesumar.foodhub.base.BaseEntity;
 import br.edu.unicesumar.foodhub.converter.BooleanToStringConverter;
@@ -33,6 +34,7 @@ public class Funcionamento implements BaseEntity {
 	@SequenceGenerator(name = "S_FUNCIONAMENTO", sequenceName = "S_FUNCIONAMENTO", allocationSize = 1)
 	private Long id;
 
+	@NotNull
 	@Column(name = "raio_funcionamento_km", nullable = false)
 	private Long raioFuncionamentoKm;
 

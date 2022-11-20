@@ -1,0 +1,39 @@
+image: maven:3-jdk-11
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  
+cache:
+  key: m2
+  paths:
+    - .m2/repository/ 
+  
+stages:
+  - test
+  - analyze
+  - deploy
+
+test:
+  stage: test
+  script: 
+    - mvn clean test
+  artifacts:
+    paths:
+      - target/site/jacoco/jacoco.xml  
+
+sonar:
+  stage: analyze
+  script:
+    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=foodhub
+
+# https://docs.gitlab.com/ee/ci/examples/deployment/
+deploy_heroku:
+  stage: deploy  
+  script: 
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  when: manual  
+  only:
+    - master

@@ -24,18 +24,5 @@
             
         </createTable>
     </changeSet>
-
-
-    <changeSet author="felipe.magrinelli" id="CREATE_S_STATUS_PEDIDO">
-        <validCheckSum>ANY</validCheckSum>
-        <preConditions onFail="MARK_RAN"
-                       onFailMessage="A sequence S_STATUS_PEDIDO já existe">
-            <not>
-                <sequenceExists sequenceName="S_STATUS_PEDIDO"/>
-            </not>
-        </preConditions>
-        <createSequence incrementBy="1"
-                        sequenceName="S_STATUS_PEDIDO" startValue="1"/>
-    </changeSet>
     
 </databaseChangeLog>
