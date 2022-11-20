@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +41,8 @@ import lombok.NoArgsConstructor;
 		"produtos.produto.nome", "produtos.complementos.id", "produtos.complementos.valorComplemento",
 		"produtos.complementos.quantidade", "produtos.complementos.produtoComplemento.id",
 		"produtos.complementos.produtoComplemento.nome", "endereco.id", "endereco.numero", "endereco.complemento",
-		"endereco.cep", "endereco.logradouro", "endereco.bairro", "endereco.cidade.nome" })
+		"endereco.cep", "endereco.logradouro", "endereco.bairro", "endereco.cidade.nome", "restauranteId",
+		"restauranteNomeFantasia" })
 public class Pedido implements BaseEntity {
 
 	@Id
@@ -91,5 +93,13 @@ public class Pedido implements BaseEntity {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco", nullable = false)
 	private Endereco endereco;
+
+	public Long getRestauranteId() {
+		return Optional.ofNullable(restaurante).orElse(new Restaurante()).getId();
+	}
+
+	public String getRestauranteNomeFantasia() {
+		return Optional.ofNullable(restaurante).orElse(new Restaurante()).getNomeFantasia();
+	}
 
 }
